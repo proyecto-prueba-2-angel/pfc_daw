@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Setters */
+* {
+  font-family: 'Exo', sans-serif;
+}
+
+.v-application {
+  font-family: "Exo", sans-serif !important;
+  background: #f7f7f7 !important;
+}
+body {
+  font-family: "Exo", sans-serif !important;
+  background: #f7f7f7 !important;
+}
+.shine-effect {
+  animation: shine 1s infinite alternate; /* Aplica la animación de brillo */
+}
+
+@keyframes shine {
+  /* Define la animación de brillo */
+  from {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Sombra inicial */
+  }
+  to {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.9); /* Sombra más intensa */
+  }
+}
+
+
+/* Añadir estas clases al archivo main.css */
+
+.show {
+  opacity: 1; /* Mostrar el elemento */
+  transition: opacity 0.5s ease-in-out; /* Agregar una transición suave */
+}
+
+.blink {
+  animation: blink-animation 1s infinite; /* Animación de parpadeo */
+}
+
+/*-------------------------------*/
+/* Estiliza la scrollbar (barra de desplazamiento) */
+::-webkit-scrollbar {
+    width: 8px; /* Ancho de la scrollbar */
+    height: 0;
+  }
+  
+  /* Estiliza el track (la pista de la scrollbar) */
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); /* Color de fondo translúcido */
+  }
+  
+  /* Estiliza el thumb (el control deslizante de la scrollbar) */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5); /* Color del deslizador translúcido */
+  }
+  
+  /* Estiliza el thumb al hacer hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); /* Oscurece un poco el deslizador al pasar el mouse */
+  }
+  
+  .cursor-grab {
+    cursor: grab; /* o cursor: -webkit-grab; para soporte de navegadores específicos */
+  }
+  
+  .cursor-grabbing {
+    cursor: grabbing; /* o cursor: -webkit-grabbing; para soporte de navegadores específicos */
+  }
+  

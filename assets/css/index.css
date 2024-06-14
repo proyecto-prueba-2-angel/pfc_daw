@@ -1,0 +1,918 @@
+.deslizar-text {
+  transform: translateY(-50%);
+}
+
+.next-slide-preview::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 5%, rgba(0, 0, 0, 0.884) 95%);
+  z-index: 2;
+}
+
+
+.next-slide-preview {
+  position: absolute;
+  right: 0; /* Alinea a la derecha */
+  top: 50%; /* Centra verticalmente, ajusta según necesites */
+  width: 22%; /* Ocupa el 20% de la pantalla */
+  transform: translateY(-50%); /* Centrado vertical */
+  z-index: 9; /* Asegúrate de que esté por debajo del botón next-arrow */
+}
+
+.next-slide-preview img {
+  width: auto;
+  height: 104vh;
+}
+
+.next-arrow {
+  width: 50%;
+  height: auto;
+  transform: rotate(270deg);
+  position: absolute;
+  right: 0; /* Ajusta según tu diseño */
+  bottom: 30%; /* Centra verticalmente */
+  cursor: pointer;
+  z-index: 10; /* Asegúrate de que esté por encima del carrusel */
+  color: #ececec; /* Cambia el color según tu preferencia */
+  font-size: 80px; /* Ajusta el tamaño del ícono */
+}
+
+.image-container2 {
+  width: 100%; /* Asegura que el contenedor de la imagen ocupe todo el ancho disponible */
+  position: relative; /* Posicionamiento relativo para posicionamiento absoluto de los hijos */
+}
+
+.image-container2 img {
+  width: 100%;
+  height: auto; /* Ajusta la altura automáticamente según el ancho */
+  transition: opacity 0.5s ease;
+}
+
+.translucent-background {
+  position: absolute;
+  top: 0;
+  left: 70%; /* Ajuste para cubrir solo una parte de la imagen desde la derecha */
+  width: 30%; /* Ajusta el ancho para que cubra la parte deseada */
+  height: 100%;
+  background-color: rgba(11, 27, 56, 0.6);
+  z-index: 2;
+}
+
+.links-container2 {
+  position: absolute;
+  right: 0; /* Posiciona el contenedor en el lado derecho */
+  top: 0;
+  width: 30%; /* Ancho del contenedor de enlaces */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los enlaces horizontalmente */
+  justify-content: center; /* Centra los enlaces verticalmente */
+  z-index: 3;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .image-container2, .translucent-background, .links-container2 {
+    display: block; /* Asegura que estos elementos se muestren en pantallas medianas */
+  }
+}
+
+@media (min-width: 1024px) {
+  .image-container2, .translucent-background, .links-container2 {
+    display: block; /* Mantiene los elementos visibles en pantallas grandes */
+  }
+}
+
+@media (max-width: 768px) {
+  .image-container2, .translucent-background, .links-container2 {
+    display: none; /* Oculta estos elementos en pantallas pequeñas */
+  }
+}
+
+.drag-image {
+  min-width: 140vw; /* Asegúrate de que la imagen sea más grande que el contenedor para poder arrastrarla */
+  transition: transform 0.3s ease-out; /* Añade una transición suave */
+  user-select: none; /* Evita la selección de texto al arrastrar */
+  pointer-events: none; /* Evita eventos de clic durante el arrastre */
+}
+
+a {
+  pointer-events: auto; /* Re-habilita eventos de clic para enlaces */
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+}
+.custom-shadow {
+  box-shadow: 2px 2px 5px 5px grey;
+}
+
+.translucent-background {
+  position: absolute;
+  top: 0;
+  right: 0; /* Ajusta para cubrir solo la mitad derecha */
+  width: 20%; /* Cubre la mitad de la anchura del contenedor */
+  height: 100%;
+  transform: translate(50%);
+  background-color: rgba(21, 24, 29, 0.925); /* Fondo blanco translúcido */
+  z-index: 2;
+}
+
+.links-container2 {
+  z-index: 3; /* Asegúrate de que esté por encima del fondo translúcido */
+  right: 0;
+  top: 50%; /* Centrar verticalmente en la mitad derecha */
+  transform: translate(30%, -50%); /* Ajuste fino de la posición */
+  width: 50%; /* Ajusta al ancho del área translúcida */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los enlaces horizontalmente */
+  font-size: 22px; /* Cambia el tamaño de la fuente */
+}
+
+.link {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  padding: 10px;
+}
+
+/* Texto descriptivo sección enlaces de cocinas */
+/* Añade esta clase a tu descripción para iniciar la animación */
+.image-description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 4px;
+  color: white;
+  background: rgba(0, 0, 0, 0.75);
+  width: 100%; /* Ajusta para que ocupe el ancho deseado */
+  box-sizing: border-box;
+  overflow: hidden; /* Permite que el texto se ajuste dentro del contenedor */
+  white-space: normal; /* Permite que el texto se ajuste en múltiples líneas */
+  transform: translateX(-100%);
+  animation: slideText 0.5s forwards;
+}
+
+/* Define la animación */
+@keyframes slideText {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideInLink {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Clases para animación secuencial */
+.show-link-1 { animation: slideInLink 0.5s ease forwards 0.5s; }
+.show-link-2 { animation: slideInLink 0.5s ease forwards 1s; }
+.show-link-3 { animation: slideInLink 0.5s ease forwards 1.5s; }
+.show-link-4 { animation: slideInLink 0.5s ease forwards 2s; }
+.show-link-5 { animation: slideInLink 0.5s ease forwards 2.5s; }
+
+@keyframes slideInLink {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.slide-title {
+  transform: translateX(-50%);
+}
+
+.slide-title3 {
+  transform: translateX(-50%);
+}
+
+#header1 {
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff; /* Fundo transparente */
+  color: #fff; /* Cor do texto do cabeçalho */
+  padding: 10px; /* Espaçamento interno */
+  z-index: 1000; /* Certifique-se de que o cabeçalho esteja acima de outros elementos */
+}
+
+#carousel {
+  position: relative;
+}
+
+.slide-wrapper {
+  display: flex;
+  transition: transform 0.7s ease-in-out; /* Suaviza el movimiento de transición */
+
+}
+
+.container2 {
+  overflow: hidden; /* Esconde a barra de rolagem horizontal */
+}
+
+.scroll-indicator {
+  height: 100vh;
+}
+
+.bottom-content {
+  display: flex;
+  overflow: hidden;
+  transition: transform 0.8s ease;
+  transform: translateX(100%);
+}
+
+.bottom-content img {
+  max-width: 100%;
+  height: auto;
+  transition: opacity 1.0s ease;
+  opacity: 0;
+}
+
+.bottom-content.slide-in {
+  transform: translateX(0%);
+}
+
+.bottom-content.slide-in img {
+  opacity: 1;
+}
+
+.overlay-text {
+  overflow: hidden;
+  margin-bottom: 120px;
+  transform: translate(-180px, 60px);
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 1px 1px 3px 3px rgba(77, 77, 77, 0.404);
+  color: black;
+  padding: 40px;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.5s;
+}
+
+.bottom-content2 {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.8s ease;
+  transform: translateX(-100%);
+}
+
+.bottom-content2 h2,
+.bottom-content2 h3 {
+  max-width: 100%;
+  height: auto;
+  transition: opacity 0.8s ease;
+  opacity: 0;
+}
+
+.bottom-content2 img {
+  width: 80%;
+  height: 600px;
+  object-fit: cover;
+  transition: opacity 0.8s ease;
+  opacity: 0;
+}
+
+.bottom-content2.slide-in {
+  transform: translateX(0%);
+}
+
+.bottom-content2.slide-in h2,
+.bottom-content2.slide-in h3,
+.bottom-content2.slide-in img {
+  opacity: 1;
+}
+
+.bottom-content3 {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.8s ease;
+  transform: translateX(100%);
+}
+
+.bottom-content3 div {
+  max-width: 100%;
+  height: auto;
+  transition: opacity 0.8s ease;
+  opacity: 0;
+}
+
+.bottom-content3.slide-in {
+  transform: translateX(0%);
+}
+
+.bottom-content3.slide-in div {
+  opacity: 1;
+}
+
+.bottom-content_md {
+  overflow: hidden;
+  transition: transform 0.8s ease;
+  transform: translateX(100%);
+}
+
+.bottom-content_md.slide-in {
+  transform: translateX(0%);
+}
+
+.bottom-content2_md {
+  overflow: hidden;
+  transition: transform 0.8s ease;
+  transform: translateX(100%);
+}
+
+.bottom-content2_md img {
+  max-width: 100%;
+  height: auto;
+  transition: opacity 1.0s ease;
+  opacity: 0;
+}
+
+.bottom-content2_md.slide-in {
+  transform: translateX(0%);
+}
+
+.bottom-content2_md.slide-in img {
+  opacity: 1;
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.slide-right {
+  animation: slideRight 0.8s forwards;
+}
+
+.animate-slide {
+  animation: slideIn 0.8s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+
+    opacity: 0;
+  }
+  to {
+
+    opacity: 1;
+  }
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  flex: 0 0 33.333%;
+  max-width: 33.333%;
+  height: 400px;
+  opacity: 0.5; /* Los slides no activos son menos visibles */
+  transition: opacity 0.5s ease; /* Transición de opacidad al cambiar de slide */
+  overflow: hidden;
+}
+
+/* Estilo base para las imágenes del carrusel */
+.carousel-slide img {
+  width: 100%; /* Cambiado para que la imagen ocupe el ancho completo del contenedor */
+  height: 40vh; /* Para mantener la proporción de aspecto */
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.5s ease; /* Suaviza el efecto de transformación */
+  position: relative; /* Asegura que el cuadrado de texto se posicione correctamente */
+}
+
+/* Estilo base para la descripción dentro del carrusel */
+.carousel-description {
+  color: #000000; /* Cambia según el diseño */
+  padding: 5px;
+  font-size: 1.3em;
+  box-shadow: #000000;
+  text-align: center;
+  transition: transform 0.5s ease; /* Opcional: si también deseas animar el texto */
+}
+
+/* Efecto de hover para el slide */
+.carousel-slide:hover img {
+  filter: brightness(1.15); /* Aumenta el tamaño de la imagen */
+}
+
+/* Efecto de hover para el texto del slide (opcional) */
+.carousel-slide:hover .carousel-description {
+  transform: scale(1.1); /* Aumenta el tamaño del texto */
+  /* color: #ffd700;  Cambia el color del texto en hover, opcional */
+  font-weight: bolder;
+}
+
+.carousel-slide:nth-child(2) {
+  opacity: 1;
+}
+
+.carousel-navigation {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  top: 55%;
+  transform: translateY(-50%);
+}
+
+.carousel-navigation button {
+  cursor: pointer;
+  padding: 10px;
+  margin: 5px;
+  background-color: rgba(0, 0, 0, 0.938);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.425);
+  transition: background-color 0.5s ease;
+}
+
+.carousel-navigation button:hover {
+  background-color: rgba(255, 255, 255, 0.938);
+  color: rgb(0, 0, 0);
+  border: 1px solid rgba(0, 0, 0, 0.267);
+}
+
+/* Media query para pantallas medianas */
+@media (max-width: 1024px) {
+  .carousel-container {
+    flex-wrap: wrap; /* Permite que los elementos se ajusten automáticamente en múltiples líneas */
+  }
+  .carousel-slide {
+    flex: 0 0 calc(50% - 20px); /* Divide en dos columnas */
+    max-width: calc(50% - 20px); /* Ajusta el ancho al 50% del contenedor */
+    margin: 10px; /* Agrega espacio entre las columnas */
+  }
+  .carousel-slide img {
+    width: 80%;
+    height: auto;
+    margin: auto;
+  }
+  /* Ocultar las flechas en pantallas medianas */
+  .carousel-navigation {
+    display: none;
+  }
+  .bottom-content {
+    flex-direction: column; /* Cambiamos la dirección del flex a columna */
+    align-items: center; /* Centramos los elementos horizontalmente */
+    padding-top: 10px;
+  }
+
+  .overlay-text {
+    width: 90%; /* Ajustamos el ancho del cuadro de texto al 60% */
+    margin-bottom: 20px; /* Añadimos un margen inferior al cuadro de texto */
+    transform: translateY(0); /* Eliminamos la transformación */
+    order: -1; /* Cambiamos el orden del texto para que aparezca antes en la disposición */
+  }
+
+  .bottom-content img {
+    width: 90%;
+    height: 50vh;
+    max-width: 100%; /* Ajustamos el ancho de la imagen al 100% */
+    margin-bottom: 20px; /* Añadimos un margen inferior a la imagen */
+    order: 1; /* Cambiamos el orden de la imagen para que aparezca después en la disposición */
+  }
+  .bottom-content2 img {
+    width: 95%;
+    height: 50%;
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+  }
+  .bottom-content2 h3 {
+    max-width: 90%; /* Ajusta el ancho máximo del texto */
+
+  }
+  .bottom-content2 .translucent-background {
+    left: 0; /* Ajusta para cubrir todo el lado izquierdo */
+    right: auto; /* Reinicia la propiedad right */
+    top: 50%; /* Centra verticalmente */
+    transform: translate(7%, -50%); /* Centra el fondo azul */
+    width: 35%; /* Cubre la mitad del ancho del contenedor */
+  }
+
+  .bottom-content2 .links-container2 {
+    left: 0; /* Ajusta para que esté a la derecha de la parte azul */
+    transform: translate(-10%, -50%); /* Ajuste fino de la posición */
+  }
+  .carousel-slide img {
+  height: 35vh; /* Para mantener la proporción de aspecto */
+}
+/* .next-slide-preview img {
+  width: 10px;
+  height: 90.5vh;
+} */
+
+}
+@media (max-width: 375px) {
+    .links-container2 {
+        flex-direction: column; /* Cambiamos la dirección de flexión a columna */
+        overflow-y: auto;
+        max-height: 150px;
+      }
+    .links-container2 .link {
+        font-size: 0.8rem; /* Podemos reducir el tamaño del texto aún más si es necesario */
+    }
+}
+
+/* Media query para dispositivos móviles y/o pantallas pequeñas */
+@media (max-width: 768px) {
+  .estatico {
+    position: static;
+  }
+  .carousel-slider {
+    height: 50vh; /* Altura del 50% del viewport en pantallas pequeñas */
+  }
+  .slide-content img {
+    max-height: 50vh; /* Establece una altura máxima para las imágenes */
+    width: auto; /* Ajusta el ancho automáticamente para mantener la proporción */
+  }
+  .slide-title2 h2 {
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente del título */
+  }
+  .slide-title2 {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  transform-origin: top left;
+}
+
+  .navigation-buttons {
+    font-size: 10px; /* Reducir el tamaño de la fuente de los botones */
+  }
+  .carousel-container {
+    flex-direction: column; /* Cambia a orientación de columna */
+  }
+  .carousel-slide {
+    flex: 1 0 33.333%; /* Divide en tres columnas */
+    max-width: 100%; /* Ajusta el ancho al 100% del contenedor */
+    height: auto; /* Ajusta la altura automáticamente */
+  }
+  /* Ajusta el tamaño de las imágenes en dispositivos móviles */
+  .carousel-slide img {
+    max-width: 70%; /* Ajusta el ancho máximo al 100% del contenedor */
+    height: auto; /* Ajusta la altura automáticamente */
+    margin: 0 auto;
+  }
+  .bottom-content2 img {
+    width: 100%;
+    height: 50%;
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+  }
+  .bottom-content2 .translucent-background {
+    left: 0; /* Ajusta para cubrir todo el lado izquierdo */
+    right: auto; /* Reinicia la propiedad right */
+    top: 50%; /* Centra verticalmente */
+    transform: translate(186%, -50%); /* Centra el fondo azul */
+    width: 35%; /* Cubre la mitad del ancho del contenedor */
+  }
+  .bottom-content2 .links-container2 {
+    left: 0; /* Ajusta para que esté a la derecha de la parte azul */
+    transform: translate(115%, -50%); /* Ajuste fino de la posición */
+  }
+  .overlay-text
+  {
+    width: 95%; /* Ajustamos el ancho del cuadro de texto al 80% */
+    margin-bottom: 20px; /* Añadimos un margen inferior al cuadro de texto */
+
+  }
+  .bottom-content img {
+    width: 95%;
+    height: 40vh;
+    max-width: 100%; /* Ajustamos el ancho de la imagen al 100% */
+    margin-bottom: 20px; /* Añadimos un margen inferior a la imagen */
+    order: 1; /* Cambiamos el orden de la imagen para que aparezca después en la disposición */
+  }
+  #carousel .container2 {
+    height: 50%;
+  }
+  .drag-image {
+    min-width: 300vw;
+  }
+  .next-slide-preview img {
+    width: auto;
+    height: 93.5vh;
+  }
+  .links-container a{
+    top: 30%;
+    left: 70%;
+  }
+  .links-container2
+  {
+    font-size: 19px;
+    padding: -5px;
+    overflow: hidden;
+  }
+  .next-arrow
+  {
+    font-size: 60px;
+  }
+
+}
+
+.bottom-content2 .links-container2 a {
+  transition: background-color 0.5s ease, color 0.5s ease, border-radius 0.5s ease, padding 0.5s ease, font-weight 0.5s ease;
+}
+
+.links-container2 a
+{
+  font-size: 0.9em;
+}
+
+.bottom-content2 .links-container2 a:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.692);
+  text-align: center;
+  font-weight: lighter;
+  overflow: hidden ;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 300px; /* Esto se ajustará según el video */
+/* Proporción para videos 16:9 */
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cubre el espacio sin perder las proporciones */
+}
+
+.overlay-text-video {
+  position: absolute;
+  font-weight: bold;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.541); /* Fondo negro translúcido */
+  color: white; /* Texto blanco */
+  padding: 20px;
+  box-sizing: border-box;
+}
+.image-transition {
+  transition: opacity 0.3s ease; /* La transición de opacidad dura 0.3 segundos */
+}
+.video-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: #00257a;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.icono-oculto {
+  opacity: 0; /* Inicialmente oculto */
+  transition: opacity 0.5s ease; /* Transición suave */
+  cursor: default;
+}
+
+.video-button:hover + .icono-oculto {
+  opacity: 1; /* Mostrar el icono al pasar el cursor sobre el botón */
+}
+
+.video-button:hover {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: #000000;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.7s ease;
+}
+/* La imagen ocupa un 100% del ancho disponible y la altura del viewport para adaptarse a diferentes dispositivos. */
+.slide-content {
+  flex: 100%;
+  min-width: 100vw;
+  height: 89vh;
+
+}
+
+.slide-content #img2,
+.slide-content #img1 {
+  width: 100%; /* Ajustar a largura da imagem para ocupar todo o espaço disponível */
+  height: 100vh; /* Altura da tela inteira */
+  object-fit: cover;
+
+}
+
+.slide-content h2 {
+  position: absolute;
+  top: 50%; /* Colocar o texto no centro vertical */
+  left: 50%; /* Colocar o texto no centro horizontal */
+  transform: translate(-50%, -50%); /* Centralizar o texto */
+  color: #fff; /* Cor do texto */
+  font-size: 24px; /* Tamanho da fonte */
+  text-align: center; /* Alinhar o texto ao centro */
+  z-index: 1; /* Colocar o texto sobre a imagem */
+}
+
+.navigation-buttons {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.navigation-buttons button {
+  margin: 10px;
+  border: none; /* Elimina el borde para un aspecto más limpio */
+  cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+}
+
+.navigation-buttons button.active {
+  background-color: #f71404; /* Color amarillo para el botón activo */
+}
+
+.navigation-buttons button.inactive {
+  background-color: #ffffff; /* Fondo blanco para botones inactivos */
+  color: #ffffff; /* Texto blanco para hacerlo invisible */
+}
+
+.navigation-buttons button:focus {
+  outline: none; /* Elimina el contorno al hacer foco para mantener el diseño limpio */
+}
+
+@media (min-width: 1024px) {
+
+.slide-title2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform-origin: top left;
+}
+
+}
+
+.slide-content2 {
+  flex: 100%;
+  min-width: 100vw;
+
+}
+
+.slide-content2 #img1 {
+  width: 100%; /* Ajustar a largura da imagem para ocupar todo o espaço disponível */
+  height: 800px; /* Altura da tela inteira */
+  object-fit: cover;
+
+}
+
+.navigation-buttons2 {
+  position: absolute;
+  bottom: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.navigation-buttons2 button {
+  margin: 10px;
+  border: none; /* Elimina el borde para un aspecto más limpio */
+  cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+}
+
+.navigation-buttons2 button.active {
+  background-color: #f7b204; /* Color amarillo para el botón activo */
+}
+
+.navigation-buttons2 button.inactive {
+  background-color: #ffffff; /* Fondo blanco para botones inactivos */
+  color: #ffffff; /* Texto blanco para hacerlo invisible */
+}
+
+.navigation-buttons2 button:focus {
+  outline: none; /* Elimina el contorno al hacer foco para mantener el diseño limpio */
+}
+
+@media (max-width: 1024px) {
+
+.slide-title2 {
+  position: absolute;
+  bottom: 60%;
+  left: 0%;
+  transform-origin: top left;
+}
+
+}
+@media (max-width: 640px) {
+
+  .slide-title2 {
+    position: absolute;
+    bottom: 80%;
+    left: 0%;
+    transform-origin: top left;
+  }
+  
+  }
+/* Aquí va el media query para que cuando la pantalla baje de 480px,
+  la sección de 'links-container2 (Cocina Moderna, Minimalista...) no se desborde */
+
+  @media (max-width: 515px) {
+  .links-container2 {
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+  }
+  .link {
+    margin-top: 10px; /* Ajusta el espaciado entre enlaces */
+    margin-bottom: 10px;
+  }
+}
+
+/* Estilos para la sección de enlaces en pantallas pequeñas */
+.style-button {
+  height: 30px;
+  line-height: 1;
+  padding: 8px 16px;
+  background-color: #00264e;
+  color: white;
+  font-weight:bold;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 5px; /* Asegura el mismo margen alrededor de los botones */
+  display: flex; /* Alinea el contenido del botón correctamente */
+  align-items: center; /* Centra el texto y otros elementos en el botón */
+  justify-content: center;
+}
+
+
+.style-button:hover {
+  background-color: #0056b3;
+}
+
+.close-btn {
+  padding-block: 1px;
+  font-size: 20px;
+  cursor: pointer;
+  position: absolute; /* Posiciona el botón de cerrar en relación al contenedor */
+  background-color: white; /* Fondo blanco para el botón */
+  border-radius: 50%; /* Hace el botón redondo */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse sobre el botón */
+  z-index: 1060; /* Asegura que el botón esté sobre la imagen */
+}
+
+.image-preview {
+  position: fixed; /* Mantiene el contenedor fijo en la pantalla */
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%);
+  z-index: 1050; /* Asegura que esté sobre otros elementos */
+  height: 55%;
+  width: 87%; /* Ocupa la altura completa de la pantalla */
+  display: flex;
+  align-items: center; /* Centra el contenido verticalmente */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  background-color: rgb(247, 247, 247); /* Fondo semi-transparente */
+}
+
+.image-preview img {
+  max-height: 50%; /* Limita la altura de la imagen al 50% del contenedor */
+  max-width: 100%; /* Limita el ancho para mantener la proporción y evitar que sea demasiado grande */
+}
+
+
+@media (max-width: 768px) {
+  .image-container2, .translucent-background, .links-container2 {
+    display: none; /* Oculta elementos no necesarios en móviles */
+  }
+  
+  #imagePreviewContainer {
+    display: none; /* Inicialmente oculto */
+  }
+
+  #imagePreviewContainer.show {
+    display: flex; /* Muestra el contenedor cuando se activa */
+  }
+}
+
+/* Estilos para pantallas: 'sm' (640px) */

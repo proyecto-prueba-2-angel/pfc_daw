@@ -1,0 +1,7 @@
+{
+  "url": "/api/promotions",
+  "statusCode": 500,
+  "statusMessage": "",
+  "message": "ENOENT: no such file or directory, open 'C:\\Users\\BEC1\\Desktop\\ÁngelSabater - Prácticas DAW\\Cocinas_Mega\\static\\promotions.json'",
+  "stack": "<pre><span class=\"stack\">at Object.readFileSync (node:fs:455:20)</span>\n<span class=\"stack\">at <anonymous> (C:\\Users\\BEC1\\Desktop\\ÁngelSabater - Prácticas DAW\\Cocinas_Mega\\server\\api\\promotions.js:13:1)</span>\n<span class=\"stack internal\">at /C:/Users/BEC1/Desktop/%C3%81ngelSabater%20-%20Pr%C3%A1cticas%20DAW/Cocinas_Mega/node_modules/h3/dist/index.mjs:1632:47</span>\n<span class=\"stack internal\">at process.processTicksAndRejections (node:internal/process/task_queues:95:5)</span>\n<span class=\"stack internal\">at async Object.handler (/C:/Users/BEC1/Desktop/%C3%81ngelSabater%20-%20Pr%C3%A1cticas%20DAW/Cocinas_Mega/node_modules/h3/dist/index.mjs:1697:19)</span>\n<span class=\"stack internal\">at async Server.toNodeHandle (/C:/Users/BEC1/Desktop/%C3%81ngelSabater%20-%20Pr%C3%A1cticas%20DAW/Cocinas_Mega/node_modules/h3/dist/index.mjs:1907:7)</span></pre>"
+}
