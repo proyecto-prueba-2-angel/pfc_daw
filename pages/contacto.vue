@@ -5,13 +5,13 @@
     <AdminButton />
     <Cookies />
 
-    <div class="hero-image relative z-0 overflow-hidden">
-      <img src="/public/images/fotos/03.jpg" class="w-full h-auto brightness-75">
+    <div class="hero-image relative z-0 overflow-hidden h-48 md:h-64 lg:h-72">
+      <img src="/public/images/fotos/03.jpg" class="w-full h-full object-cover brightness-75">
       <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-        <h1 class="shine-effect text-white text-5xl md:text-9xl font-bold shadow-lg rounded-xl p-4">CONTACTO</h1>
+        <h1 class="shine-effect text-white text-5xl md:text-7xl lg:text-9xl font-bold shadow-lg rounded-xl p-4">CONTACTO</h1>
       </div>
     </div>
-    <div class="contenedor shadow-lg shadow-zinc-50 bg-gray-300 px-6 py-24 sm:py-32 lg:px-8">
+    <div class="contenedor shadow-lg shadow-zinc-50 bg-gray-900 px-6 py-24 sm:py-32 lg:px-8">
       <div class="form-card rounded-md p-4">
         <div class="mx-auto my-4 max-w-2xl text-center">
           <h2 class="text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">Contáctanos</h2>
@@ -55,8 +55,8 @@
                 <span v-if="errors.mensaje" class="text-red-500 text-sm">{{ errors.mensaje }}</span>
               </div>
             </div>
-            <div class="sm:col-span-2 flex items-center">
-              <input id="aceptarPolit" v-model="aceptarPolit" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+            <div class="sm:col-span-2 flex items-start sm:items-center sm:flex-row flex-col">
+              <input id="aceptarPolit" v-model="aceptarPolit" type="checkbox" class="max-w-4 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 mt-1">
               <label for="aceptarPolit" class="ml-2 text-sm leading-6 text-gray-600">
                 Al seleccionar esto, también aceptarás nuestra
                 <a href="/politicapriv" target="_blank" class="font-semibold text-indigo-600">política&nbsp;de&nbsp;privacidad</a>.
@@ -65,7 +65,10 @@
             </div>
           </div>
           <div class="mt-10">
-            <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Envía tu Mensaje</button>
+            <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              <span v-if="!isSubmitting">Envía tu Mensaje</span>
+              <span v-else>Enviando...</span>
+            </button>
           </div>
         </form>
 
@@ -91,6 +94,7 @@
 import { ref } from 'vue';
 
 const showModal = ref(false);
+const isSubmitting = ref(false);
 const nombre = ref('');
 const apellido = ref('');
 const email = ref('');
@@ -139,6 +143,7 @@ function validEmail(email) {
 }
 
 async function submitForm() {
+  isSubmitting.value = true;
   const formData = new FormData();
   formData.append('nombre', nombre.value);
   formData.append('apellido', apellido.value);
@@ -163,6 +168,8 @@ async function submitForm() {
     }
   } catch (error) {
     console.error('Error:', error);
+  } finally {
+    isSubmitting.value = false;
   }
 }
 
@@ -178,8 +185,13 @@ function clearForm() {
 </script>
 
 <style scoped>
+.hero-image {
+  height: 48vh; /* Ajustar la altura en pantallas grandes */
+}
 .hero-image img {
   filter: brightness(50%);
+  height: 100%;
+  object-fit: cover;
 }
 
 .form-card {
@@ -198,16 +210,6 @@ input, textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 16px;
-}
-
-button {
-  background-color: #090c3b;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 button:hover {

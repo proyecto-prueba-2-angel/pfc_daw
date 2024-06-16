@@ -6,16 +6,10 @@
     <AdminButton />
     <div class="flex flex-col items-center justify-center flex-grow">
       <div class="relative w-full">
-        <!-- Imagen de fondo con brillo controlado dinámicamente -->
         <img :class="brightnessClass" src="/images/fotos/19_clasificar.jpg" alt="Luxurious Marble Interior" class="w-full h-screen object-cover animate-fade transition-all duration-1000">
-        <!-- Contenedor de texto con animación de revelación de caracteres -->
         <div class="absolute top-1/4 w-full text-center">
           <h1 class="shine-effect text-6xl md:text-9xl font-bold text-white mb-16">
-            <span
-              v-for="(char, index) in titleChars" :key="index"
-              :class="['revealText', index % 2 === 0 ? 'animate-fade-in-down' : 'animate-fade-in-up']"
-              class="inline-block opacity-0"
-            >
+            <span v-for="(char, index) in titleChars" :key="index" :class="['revealText', index % 2 === 0 ? 'animate-fade-in-down' : 'animate-fade-in-up']" class="inline-block opacity-0">
               {{ char }}
             </span>
           </h1>
@@ -27,8 +21,15 @@
           </p>
         </div>
       </div>
-      <div class="acabados-seccion"></div>
     </div>
+
+    <div class="bg-white p-8 shadow-lg rounded-lg mx-6 md:mx-12 lg:mx-32 mt-16 acabados-seccion">
+      <h2 class="text-2xl font-bold mb-4 text-gray-800 text-center">¿Qué es un Acabado?</h2>
+      <p class="text-gray-700 text-lg leading-8 text-justify">
+        Un acabado en mármol se refiere al tratamiento superficial que se le da a la piedra para obtener diversas texturas y apariencias. Existen numerosos tipos de acabados, cada uno con sus características únicas, diseñados para resaltar la belleza natural del mármol y adaptarse a distintos estilos y necesidades. Disponemos de 5 acabados exclusivos, cada uno cuidadosamente seleccionado para ofrecerte la mejor calidad y estética en tus proyectos.
+      </p>
+    </div>
+
     <div class="my-12 container mx-auto">
       <div class="grid grid-cols-1 gap-8">
         <div v-for="(acabado, key) in acabados" :key="key" class="bg-white p-6 shadow-lg rounded-lg">
@@ -44,7 +45,7 @@
         </div>
       </div>
     </div>
-    <!-- Modal para dispositivos móviles -->
+
     <TransitionRoot as="template" :show="isModalOpen">
       <Dialog as="div" class="fixed inset-0 z-10 overflow-y-auto" @close="closeModal">
         <div class="min-h-screen px-4 text-center flex items-center justify-center modal-container">
@@ -78,16 +79,19 @@ import { ref, reactive, onMounted, computed, watch } from 'vue';
 import { Dialog, DialogOverlay, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue';
 
 const titleChars = 'ACABADOS'.split('');
-const brightnessClass = ref('brightness-100'); // Inicia con brillo al 100%
+const brightnessClass = ref('brightness-100');
 
 setTimeout(() => {
-  brightnessClass.value = 'brightness-50'; // Cambia a brillo 50% después de 1 segundo
+  brightnessClass.value = 'brightness-50';
 }, 200);
 
 function scrollToAcabados() {
   const acabadosSection = document.querySelector('.acabados-seccion');
   if(acabadosSection) {
-    acabadosSection.scrollIntoView({ behavior: 'smooth' });
+    window.scrollTo({
+      top: acabadosSection.offsetTop - 112, // Ajusta 112px por la altura del header sticky
+      behavior: 'smooth'
+    });
   }
 }
 
@@ -158,15 +162,15 @@ function toggleInfo(acabado) {
   expandedAcabado.value = showMoreInfo[acabado.title] ? acabado : null;
 }
 
-window.addEventListener('resize', () => {
-  isMobile.value = window.innerWidth < 768;
-  if(!isMobile.value) {
-    closeModal(); // Cerrar el modal si ya no estamos en móvil
-  }
-});
-
 onMounted(() => {
   isMobile.value = window.innerWidth < 768;
+  window.addEventListener('resize', () => {
+    isMobile.value = window.innerWidth < 768;
+    if(!isMobile.value) {
+      closeModal();
+    }
+  });
+
   watch(() => isModalOpen.value, (newValue) => {
     if(newValue && !isMobile.value) {
       closeModal();
@@ -220,12 +224,12 @@ const formattedDescription = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 6rem; /* Espacio para el header */
+  padding-top: 6rem;
 }
 
 .dialog-panel {
-  max-height: 90vh; /* Ajuste de la altura máxima del modal */
-  overflow-y: auto; /* Habilitar desplazamiento si el contenido es demasiado alto */
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal-paragraph {
@@ -233,17 +237,17 @@ const formattedDescription = computed(() => {
   margin-bottom: 1rem;
   text-align: justify;
   font-size: 1.1rem;
-  text-indent: 1em; /* Sangría en la primera línea */
-  padding: 0.5rem 0; /* Espaciado adicional entre párrafos */
+  text-indent: 1em;
+  padding: 0.5rem 0;
 }
 
 @media (max-width: 768px) {
   .modal-container {
-    padding-top: 7rem; /* Incrementa el padding superior para móviles */
+    padding-top: 7rem;
   }
 
   .modal-paragraph {
-    font-size: 1rem; /* Tamaño de fuente más pequeño en móviles */
+    font-size: 1rem;
   }
 }
 </style>

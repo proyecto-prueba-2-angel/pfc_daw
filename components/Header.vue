@@ -1,5 +1,5 @@
 <template>
-  <header v-bind="$attrs" class="h-28 w-full bg-zinc-950 flex items-center border-gray-900 shadow-lg">
+  <header class="h-28 w-full bg-zinc-950 flex items-center border-gray-900 shadow-lg">
     <nav class="animate-fade-right w-full">
       <div class="max-w-screen-xl flex items-center justify-between mx-auto px-4 py-2">
         <!-- Botón del menú burger (visible solo en móviles) -->

@@ -7,7 +7,7 @@
     <img src="/images/fotos/23.jpg" class="absolute h-full w-full object-cover -z-10 brightness-50" />
 
     <div class="flex-grow flex items-center justify-center p-4 z-20">
-      <div class="bg-white rounded-lg p-8 max-w-4xl w-full shadow-md shadow-zinc-50">
+      <div class="bg-white rounded-2xl p-8 max-w-4xl w-full shadow-lg shadow-zinc-50">
         <h2 class="text-2xl font-bold text-center text-gray-700 mb-6 uppercase">Solicitud de Presupuesto</h2>
 
         <form class="space-y-6" @submit.prevent="validateForm">
@@ -70,11 +70,12 @@
           </div>
 
           <div class="flex justify-between">
-            <button type="button" class="py-2 px-4 bg-gray-400 text-white font-bold rounded hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50" @click="resetForm">
+            <button type="button" class="py-2 px-4 bg-gray-400 text-white font-bold rounded-lg hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50" @click="resetForm">
               Borrar
             </button>
-            <button type="submit" class="py-2 px-4 bg-indigo-600 text-white font-bold rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
-              Enviar Solicitud
+            <button type="submit" class="py-2 px-4 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+              <span v-if="isSubmitting">Enviando...</span>
+              <span v-else>Enviar Solicitud</span>
             </button>
           </div>
         </form>
@@ -85,7 +86,7 @@
             <h2 class="text-xl font-bold mb-4">Confirmación de Presupuesto</h2>
             <p class="text-gray-600 mb-4">Tu solicitud de presupuesto se ha enviado correctamente. En breve nos pondremos en contacto contigo.</p>
             <div class="mt-8">
-              <button type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500" @click="closeModal">
+              <button type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-lg hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500" @click="closeModal">
                 CERRAR
               </button>
             </div>
@@ -102,6 +103,7 @@
 import { ref } from 'vue';
 
 const showModal = ref(false);
+const isSubmitting = ref(false);
 const nombre = ref('');
 const apellidos = ref('');
 const email = ref('');
@@ -143,6 +145,7 @@ function validEmail(email) {
 }
 
 async function submitForm() {
+  isSubmitting.value = true;
   const formData = new FormData();
   formData.append('nombre', nombre.value);
   formData.append('apellidos', apellidos.value);
@@ -162,11 +165,8 @@ async function submitForm() {
     });
     const result = await response.json();
 
-    console.log('Result:', result);
-
     if(result.success) {
       showModal.value = true;
-      console.log('Show Modal:', showModal.value);
       clearForm();
     } else {
       errors.value.general = 'Error al enviar el formulario: ' + result.message;
@@ -174,6 +174,8 @@ async function submitForm() {
   } catch (error) {
     console.error('Error:', error);
     errors.value.general = 'Error al enviar el formulario.';
+  } finally {
+    isSubmitting.value = false;
   }
 }
 
@@ -191,5 +193,21 @@ function clearForm() {
 </script>
 
 <style scoped>
-/* Aquí puedes agregar estilos específicos si lo deseas */
+/* Ajuste de estilos para bordes redondeados y sombra */
+.bg-white {
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste de estilos para el botón */
+button {
+  transition: background-color 0.3s;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .bg-white {
+    padding: 1rem;
+  }
+}
 </style>

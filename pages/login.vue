@@ -14,9 +14,9 @@
         <div class="mt-10 w-full px-4 max-w-md">
           <div class="bg-gray-100 rounded-lg shadow-xl p-6">
             <div class="text-lg text-center text-white bg-gray-800 font-bold mb-4 capitalize py-2 rounded">Iniciar sesión</div>
-            <form class="space-y-4" @submit.prevent="loginUser">
-              <input v-model="email" type="email" class="form-input w-full" placeholder="E-mail" required>
-              <input v-model="password" :type="showPassword ? 'text' : 'password'" class="form-input w-full" placeholder="Contraseña" required>
+            <form class="space-y-4" autocomplete="on" @submit.prevent="loginUser">
+              <input id="email" v-model="email" type="email" name="email" class="form-input w-full" placeholder="E-mail" autocomplete="username" required>
+              <input id="password" v-model="password" :type="showPassword ? 'text' : 'password'" name="password" class="form-input w-full" placeholder="Contraseña" autocomplete="current-password" required>
               <div class="flex items-center justify-between">
                 <button type="button" class="text-sm text-gray-600 hover:text-gray-800" @click="togglePasswordVisibility">
                   Mostrar/Ocultar <font-awesome-icon :icon="showPassword ? 'eye-slash' : 'eye'" />

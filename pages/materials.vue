@@ -53,7 +53,7 @@
       <!-- Contenido de cortinas -->
       <!-- Primer div con imagen y transición de derecha a izquierda -->
       <div class="full-screen-image-container hidden md:flex my-8 mx-8 border-1 border-zinc-950 rounded-lg shadow-zinc-950 shadow-md">
-        <img src="/images/crema_background1.jpg" alt="Imagen" class="full-screen-image" />
+        <img src="/images/marfilxl.jpg" alt="Imagen" class="full-screen-image" />
         <div id="cortina" :class="{ 'show': showContent }" class="content text-justify relative">
           <h1 class="uppercase transition-transform duration-500 ease-in-out transform cursor-pointer shine-effect hover:translate-x-2 hover:opacity-90 text-2xl md:text-4xl">
             CREMA MARFIL
@@ -100,7 +100,7 @@
       <div class="mb-8">
         <!-- Segundo div con imagen y transición de izquierda a derecha -->
         <div class="second-image-container hidden md:flex mx-8 my-16 border-1 border-zinc-950 rounded-lg shadow-zinc-950 shadow-md">
-          <img src="/images/marron1.jpg" alt="Otra Imagen" class="second-image" />
+          <img src="/images/marron2xl.jpg" alt="Otra Imagen" class="second-image" />
           <div id="second-cortina" :class="{ 'show': secondShowContent }" class="content2 text-justify relative">
             <div class="second-text">
               <h1 class="uppercase transition-transform duration-500 ease-in-out transform shine-effect cursor-pointer text-left hover:translate-x-2 hover:opacity-90 text-2xl md:text-4xl">MARRON EMPERADOR</h1>
