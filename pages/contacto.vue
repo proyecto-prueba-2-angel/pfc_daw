@@ -7,13 +7,12 @@
 
     <div class="hero-image relative z-0 overflow-hidden">
       <img src="/public/images/fotos/03.jpg" class="w-full h-auto brightness-75">
-      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <h1 class="shine-effect text-white text-9xl font-bold shadow-lg rounded-xl p-4">CONTACTO</h1>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+        <h1 class="shine-effect text-white text-5xl md:text-9xl font-bold shadow-lg rounded-xl p-4">CONTACTO</h1>
       </div>
     </div>
-    <div class="contenedor shadow-lg shadow-zinc-50 bg-white px-6 py-24 sm:py-32 lg:px-8">
-      <div class="form-card rounded-md p-2">
-        <Cortina />
+    <div class="contenedor shadow-lg shadow-zinc-50 bg-gray-300 px-6 py-24 sm:py-32 lg:px-8">
+      <div class="form-card rounded-md p-4">
         <div class="mx-auto my-4 max-w-2xl text-center">
           <h2 class="text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">Contáctanos</h2>
           <p class="mt-2 text-lg leading-8 text-gray-600">Déjanos tus datos y nosotros nos encargaremos en entrar en contacto contigo.</p>
@@ -56,8 +55,8 @@
                 <span v-if="errors.mensaje" class="text-red-500 text-sm">{{ errors.mensaje }}</span>
               </div>
             </div>
-            <div class="sm:col-span-2 flex flex-row items-center space-x-4">
-              <input id="aceptarPolit" v-model="aceptarPolit" type="checkbox" class="max-w-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+            <div class="sm:col-span-2 flex items-center">
+              <input id="aceptarPolit" v-model="aceptarPolit" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
               <label for="aceptarPolit" class="ml-2 text-sm leading-6 text-gray-600">
                 Al seleccionar esto, también aceptarás nuestra
                 <a href="/politicapriv" target="_blank" class="font-semibold text-indigo-600">política&nbsp;de&nbsp;privacidad</a>.
@@ -66,7 +65,7 @@
             </div>
           </div>
           <div class="mt-10">
-            <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" @click="showModal = true">Envía tu Mensaje</button>
+            <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Envía tu Mensaje</button>
           </div>
         </form>
 
@@ -183,16 +182,12 @@ function clearForm() {
   filter: brightness(50%);
 }
 
-.contenedor {
-  background-color: transparent;
-}
-
 .form-card {
   background-color: rgba(238, 238, 238, 0.928);
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   padding: 20px;
-  width: 40%;
   margin: 0 auto;
+  max-width: 800px;
   background-size: cover;
   background-position: center;
 }
@@ -220,9 +215,18 @@ button:hover {
 }
 
 @media (max-width: 768px) {
+  .hero-image h1 {
+    font-size: 3rem;
+  }
   .form-card {
     width: 100%;
     padding: 15px;
+  }
+  .contenedor {
+    padding: 1rem;
+  }
+  .sm\\:col-span-2.flex.items-start {
+    flex-direction: column;
   }
 }
 

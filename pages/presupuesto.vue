@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex flex-col bg-no-repeat bg-cover bg-fixed">
-    <Header class="sticky top-0 left-0 w-full bg-white bg-opacity-95 text-white p-2.5 z-50" />
+    <Header />
     <SubirBoton />
     <Cookies />
     <AdminButton />

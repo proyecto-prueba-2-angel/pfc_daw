@@ -1,6 +1,6 @@
 <template>
-  <div class="acabados bg-gray-200 min-h-screen flex flex-col">
-    <Header class="sticky top-0 left-0 w-full bg-white bg-opacity-95 text-white p-2.5 z-50" />
+  <div class="acabados bg-gray-300 min-h-screen flex flex-col">
+    <Header />
     <SubirBoton />
     <Cookies />
     <AdminButton />
@@ -27,48 +27,55 @@
           </p>
         </div>
       </div>
+      <div class="acabados-seccion"></div>
     </div>
-    <div class="acabados-seccion my-12 container mx-auto">
+    <div class="my-12 container mx-auto">
       <div class="grid grid-cols-1 gap-8">
-        <!-- Envejecido -->
-        <div v-for="(acabado, key) in ['envejecido', 'pulido', 'otroAcabado']" :key="key" class="bg-white p-6 shadow-lg rounded-lg">
-          <h3 class="text-xl font-bold mb-4">{{ acabado }}</h3>
-          <img :src="`/images/fotos/${acabado}.jpg`" :alt="acabado" class="w-full h-64 object-cover rounded mb-4">
-          <p class="text-gray-600 mb-4">Descripción del acabado {{ acabado }}.</p>
-          <button class="mt-4 px-4 py-2 bg-black text-white rounded hover:bg-gray-900 transition duration-300" @click="toggleInfo(acabado)">
-            Ver más
+        <div v-for="(acabado, key) in acabados" :key="key" class="bg-white p-6 shadow-lg rounded-lg">
+          <h3 class="text-xl font-bold mb-4">{{ acabado.title }}</h3>
+          <img :src="acabado.image" :alt="acabado.title" class="w-full h-64 object-cover rounded mb-4">
+          <p class="text-gray-600 mb-4">{{ acabado.shortDescription }}</p>
+          <button class="mt-4 px-4 py-2 bg-black text-white rounded hover:bg-gray-900 transition duration-300" @click="openModal(acabado)">
+            {{ showMoreInfo[acabado.title] ? 'Ver menos' : 'Ver más' }}
           </button>
-          <div v-if="showMoreInfo[acabado]">
-            <p class="text-gray-800 mt-4">Información detallada sobre el acabado {{ acabado }}.</p>
+          <div v-if="showMoreInfo[acabado.title] && !isMobile">
+            <p class="text-gray-800 mt-4">{{ acabado.detailedDescription }}</p>
           </div>
-        </div>
-
-        <!-- Pulido -->
-        <div class="bg-white p-6 shadow-lg rounded-lg">
-          <h3 class="text-xl font-bold mb-4">Pulido</h3>
-          <img src="/images/fotos/13.jpg" alt="Pulido" class="w-full h-64 object-cover rounded mb-4">
-          <p class="text-gray-600 mb-4">El acabado pulido ofrece una superficie lisa y brillante que resalta los colores y vetas naturales del mármol, perfecto para un look elegante.</p>
-          <button class="mt-4 px-4 py-2 bg-black text-white rounded hover:bg-gray-900 transition duration-300">
-            Ver más
-          </button>
-        </div>
-        <!-- Otro Acabado -->
-        <div class="bg-white p-6 shadow-lg rounded-lg">
-          <h3 class="text-xl font-bold mb-4">Otro Acabado</h3>
-          <img src="/images/fotos/12.jpg" alt="Otro Acabado" class="w-full h-64 object-cover rounded mb-4">
-          <p class="text-gray-600 mb-4">Este acabado ofrece características únicas que aportan un estilo distintivo y personalizado a cualquier proyecto.</p>
-          <button class="mt-4 px-4 py-2 bg-black text-white rounded hover:bg-gray-900 transition duration-300">
-            Ver más
-          </button>
         </div>
       </div>
     </div>
+    <!-- Modal para dispositivos móviles -->
+    <TransitionRoot as="template" :show="isModalOpen">
+      <Dialog as="div" class="fixed inset-0 z-10 overflow-y-auto" @close="closeModal">
+        <div class="min-h-screen px-4 text-center flex items-center justify-center modal-container">
+          <TransitionChild as="template" enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
+            <DialogOverlay class="fixed inset-0 bg-black bg-opacity-30" />
+          </TransitionChild>
+          <span class="inline-block h-screen align-middle" aria-hidden="true">&#8203;</span>
+          <TransitionChild as="template" enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
+            <div class="inline-block w-full max-w-4xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <DialogPanel>
+                <h2 class="text-3xl font-bold mb-4">{{ selectedAcabado.title }}</h2>
+                <img :src="selectedAcabado.image" :alt="selectedAcabado.title" class="w-full h-64 object-cover rounded mb-4">
+                <p class="text-gray-600 modal-paragraph mb-4" v-html="formattedDescription"></p>
+                <div class="mt-8">
+                  <button type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-gray-900 border border-transparent rounded-md hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500" @click="closeModal">
+                    CERRAR
+                  </button>
+                </div>
+              </DialogPanel>
+            </div>
+          </TransitionChild>
+        </div>
+      </Dialog>
+    </TransitionRoot>
     <Footer />
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted, computed, watch } from 'vue';
+import { Dialog, DialogOverlay, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue';
 
 const titleChars = 'ACABADOS'.split('');
 const brightnessClass = ref('brightness-100'); // Inicia con brillo al 100%
@@ -84,15 +91,92 @@ function scrollToAcabados() {
   }
 }
 
+const acabados = ref([
+  {
+    title: 'En bruto',
+    image: '/images/bruto2.jpg',
+    shortDescription: 'El mármol en su estado natural, sin ningún tratamiento.',
+    detailedDescription: 'El mármol en bruto muestra su belleza natural sin ningún tipo de tratamiento. Ideal para proyectos rústicos y naturales, combina bien con elementos de madera y vegetación para un ambiente orgánico y auténtico. Además, este acabado permite apreciar las imperfecciones y la verdadera esencia de la piedra, ofreciendo una estética única y sin artificios. Se utiliza comúnmente en espacios exteriores, jardines y patios, donde se busca un aspecto más natural y menos refinado.'
+  },
+  {
+    title: 'Envejecido',
+    image: '/images/vejez2.png',
+    shortDescription: 'Superficie tratada para parecer antigua y desgastada.',
+    detailedDescription: 'El acabado envejecido proporciona una apariencia rústica y desgastada, agregando carácter y antigüedad a cualquier espacio. Perfecto para decoraciones vintage o industriales, combina excelentemente con metales oxidados y maderas envejecidas. Este acabado se logra mediante técnicas que simulan el desgaste natural del mármol a lo largo del tiempo, ofreciendo una superficie con texturas y tonalidades que evocan la historia y el paso de los años. Es ideal para su uso en ambientes interiores como salas de estar, cocinas y baños, donde se desea una apariencia antigua y acogedora.'
+  },
+  {
+    title: 'Pulido',
+    image: '/images/acabado1.jpg',
+    shortDescription: 'Superficie lisa y brillante que resalta los colores y vetas.',
+    detailedDescription: 'El acabado pulido ofrece una superficie lisa y brillante que realza los colores y las vetas del mármol. Ideal para espacios elegantes y sofisticados, queda perfecto en cocinas modernas y baños lujosos, reflejando la luz y ampliando visualmente el espacio. Este proceso involucra el lijado y pulido de la superficie del mármol hasta lograr un brillo espejo, resaltando así su riqueza cromática y patrones naturales. Además de su atractivo estético, el mármol pulido es fácil de limpiar y mantener, siendo una opción popular para encimeras, suelos y paredes en proyectos de alto nivel.'
+  },
+  {
+    title: 'Apomazado',
+    image: '/images/pomaz2.jpg',
+    shortDescription: 'Superficie mate y suave, menos brillante que el pulido.',
+    detailedDescription: 'El acabado apomazado presenta una superficie mate y suave, ofreciendo un aspecto más sutil y contemporáneo. Es perfecto para interiores minimalistas y modernos, combinando bien con muebles de líneas limpias y colores neutros. Este acabado se obtiene mediante un proceso de lijado que deja la superficie lisa pero sin brillo, permitiendo que el mármol mantenga su color y textura naturales sin reflejar la luz. Es ideal para suelos y revestimientos donde se busca una apariencia sofisticada pero sin el brillo intenso del mármol pulido, creando un ambiente sereno y elegante.'
+  },
+  {
+    title: 'Abujardado',
+    image: '/images/abuj2.jpg',
+    shortDescription: 'Superficie rugosa con textura uniforme.',
+    detailedDescription: 'El acabado abujardado crea una superficie rugosa con textura uniforme, proporcionando excelente agarre. Ideal para suelos exteriores y áreas húmedas como piscinas y baños, se combina bien con otros materiales antideslizantes para mayor seguridad. Este acabado se logra mediante la aplicación de una herramienta llamada bujarda, que martillea la superficie del mármol creando pequeños cráteres uniformes. Además de su funcionalidad en términos de seguridad, el acabado abujardado añade una dimensión táctil al mármol, haciendo que sea visualmente atractivo y práctico para áreas de alto tránsito y exposición a la humedad.'
+  }
+]);
+
 const showMoreInfo = reactive({
-  envejecido: false,
-  pulido: false,
-  otroAcabado: false
+  'En bruto': false,
+  Envejecido: false,
+  Pulido: false,
+  Apomazado: false,
+  Abujardado: false
 });
 
-function toggleInfo(acabado) {
-  showMoreInfo[acabado] = !showMoreInfo[acabado];
+const isModalOpen = ref(false);
+const selectedAcabado = ref({});
+const isMobile = ref(false);
+const expandedAcabado = ref(null);
+
+function openModal(acabado) {
+  if(window.innerWidth < 768) {
+    selectedAcabado.value = acabado;
+    isModalOpen.value = true;
+  } else {
+    toggleInfo(acabado);
+  }
 }
+
+function closeModal() {
+  isModalOpen.value = false;
+}
+
+function toggleInfo(acabado) {
+  if(expandedAcabado.value && expandedAcabado.value.title !== acabado.title) {
+    showMoreInfo[expandedAcabado.value.title] = false;
+  }
+  showMoreInfo[acabado.title] = !showMoreInfo[acabado.title];
+  expandedAcabado.value = showMoreInfo[acabado.title] ? acabado : null;
+}
+
+window.addEventListener('resize', () => {
+  isMobile.value = window.innerWidth < 768;
+  if(!isMobile.value) {
+    closeModal(); // Cerrar el modal si ya no estamos en móvil
+  }
+});
+
+onMounted(() => {
+  isMobile.value = window.innerWidth < 768;
+  watch(() => isModalOpen.value, (newValue) => {
+    if(newValue && !isMobile.value) {
+      closeModal();
+    }
+  });
+});
+
+const formattedDescription = computed(() => {
+  return selectedAcabado.value.detailedDescription.replace(/\n/g, '<br />');
+});
 </script>
 
 <style scoped>
@@ -130,5 +214,36 @@ function toggleInfo(acabado) {
 
 .animate-fade-in-up {
   animation: fade-in-up 1.5s ease forwards;
+}
+
+.dialog-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6rem; /* Espacio para el header */
+}
+
+.dialog-panel {
+  max-height: 90vh; /* Ajuste de la altura máxima del modal */
+  overflow-y: auto; /* Habilitar desplazamiento si el contenido es demasiado alto */
+}
+
+.modal-paragraph {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  text-align: justify;
+  font-size: 1.1rem;
+  text-indent: 1em; /* Sangría en la primera línea */
+  padding: 0.5rem 0; /* Espaciado adicional entre párrafos */
+}
+
+@media (max-width: 768px) {
+  .modal-container {
+    padding-top: 7rem; /* Incrementa el padding superior para móviles */
+  }
+
+  .modal-paragraph {
+    font-size: 1rem; /* Tamaño de fuente más pequeño en móviles */
+  }
 }
 </style>

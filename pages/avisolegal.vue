@@ -1,24 +1,24 @@
 <template>
-  <div class="min-h-screen bg-gray-100 flex flex-col">
+  <div class="min-h-screen bg-gray-300 flex flex-col">
     <Header />
     <SubirBoton />
     <AdminButton />
     <Cookies />
     <div class="flex-1 relative text-justify">
 
-      <div class="bg-white max-w-7xl mx-auto p-6 shadow-sm mt-6 rounded-lg my-32">
-        <div class="absolute top-0 left-0 right-0 bottom-0 bg-cover bg-center opacity-20 bg-fixed" style="background-image: url('/images/fondo2.jpg');"></div>
+      <div class="relative max-w-7xl mx-auto p-6 shadow-sm mt-6 rounded-lg my-32 bg-white bg-opacity-80">
+        <div class="absolute top-0 left-0 right-0 bottom-0 bg-cover bg-center opacity-50 bg-fixed" style="background-image: url('/images/fondo2.jpg');"></div>
         <h1 class="text-3xl font-bold text-center mb-6 uppercase">Aviso Legal y Condiciones Generales de Uso</h1>
 
         <!-- Sección de Información General -->
         <section class="my-6">
           <h2 class="text-xl font-semibold mb-4">I. INFORMACIÓN GENERAL</h2>
           <p>En cumplimiento con el deber de información dispuesto en la Ley 34/2002 de Servicios de la Sociedad de la Información y el Comercio Electrónico (LSSI-CE) de 11 de julio, se facilitan a continuación los siguientes datos de información general de este sitio web:</p>
-          <p>La titularidad de este sitio web, <strong>https://marmoleseurostone.com/</strong>, la ostenta: <strong>EUROSTONE S.L.</strong>, provista de NIF: <strong>A-12345678</strong> e inscrita en con los siguientes datos registrales, cuyo representante es y cuyos datos de contacto son:</p>
+          <p>La titularidad de este sitio web, <strong>https://marmoleseurostone.com/</strong>, la ostenta: <strong>EUROSTONE S.A.</strong>, provista de NIF: <strong>A-12345678</strong> e inscrita en con los siguientes datos registrales, cuyo representante es y cuyos datos de contacto son:</p>
           <ul>
-            <li>Dirección: [Dirección completa]</li>
-            <li>Teléfono de contacto: [Número]</li>
-            <li>Email de contacto: [Email]</li>
+            <li>Dirección: Ctra. Madrid - Alicante Km 383 - C.P. 03660 - Novelda (Alicante) España</li>
+            <li>Teléfono de contacto: +34 965 600 550</li>
+            <li>Email de contacto: eurostonesl@gmail.com</li>
           </ul>
         </section>
 
@@ -83,6 +83,19 @@ export default {
 }
 </script>
 
-  <style scoped>
-  /* Estilos adicionales si son necesarios */
-  </style>
+<style scoped>
+.encabezado {
+  background-image: linear-gradient(to right, #4a4a4a, #2e2e2e);
+}
+
+.relative {
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.absolute {
+  z-index: -1;
+}
+</style>

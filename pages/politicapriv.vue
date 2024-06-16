@@ -1,18 +1,18 @@
 <template>
-  <div class="bg-gray-200" style="background-image: url('/images/blanco1.jpg');">
+  <div class="bg-gray-300">
     <Header />
     <Cortina />
     <Cookies />
     <SubirBoton />
     <AdminButton />
-    <div class="relative bg-cover bg-center h-60 flex items-center justify-center" style="background-image: url('/images/fotos/03.jpg');">
-      <h1 class="text-white text-6xl font-bold bg-zinc-900 shadow-lg rounded-xl p-4">Política de Privacidad</h1>
+    <div class="relative bg-cover bg-center h-60 flex items-center justify-center bg-opacity-75 md:h-80 lg:h-96" style="background-image: url('/images/fotos/03.jpg');">
+      <h1 class="text-white text-3xl md:text-5xl lg:text-6xl font-bold bg-black bg-opacity-50 rounded-xl p-4">Política de Privacidad</h1>
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 py-16 bg-white shadow-lg rounded">
+    <div class="privacy-policy mx-auto mt-8 mb-8 p-4 md:p-6 lg:p-8 bg-white shadow-lg rounded-lg">
       <p class="text-justify mt-4 mx-4">
         ¡Bienvenido a nuestra página de Política de Privacidad! Cuando utiliza los servicios de
-        nuestro sitio web, nos confía su información.  Esto es importante; Esperamos que te tomes
+        nuestro sitio web, nos confía su información. Esto es importante; Esperamos que te tomes
         el tiempo de leerlo detenidamente. Recuerde, puede encontrar controles para administrar su información
         y proteger su privacidad y seguridad. Hemos tratado de mantenerlo lo más simple posible.
       </p>
@@ -31,9 +31,9 @@
       </section>
       <section>
         <h2 class="font-bold mx-4 mt-2">Propietario del sitio web</h2>
-        <p class="mx-4">El propietario del sitio weby donde puede dirigirse para cualquier cuestion
+        <p class="mx-4">El propietario del sitio web donde puede dirigirse para cualquier cuestión
           relacionada con sus datos es: <b>EUROSTONE</b> S.A. Ctra. Madrid - Alicante Km 383 C.P.
-          03660 - Novelda (Alicante) España Tel: 965600550 mail: eurostone@marmoleseurostone.com
+          03660 - Novelda (Alicante) España Tel: 965600550 Email: eurostonesl@gmail.com
         </p>
       </section>
       <section>
@@ -48,7 +48,7 @@
           correos electrónicos promocionales, llamadas telefónicas y correo postal visitando e
           iniciando sesión en Company Promotional Communications Manager, que le permite actualizar
           la información de contacto, administrar las preferencias de contacto, optar por no recibir
-          suscripciones de correo electrónico y elegir si desea Comparta su información de contacto con
+          suscripciones de correo electrónico y elegir si desea compartir su información de contacto con
           nuestros socios. Estas opciones no se aplican a las comunicaciones de servicio obligatorias que
           forman parte de ciertos servicios del sitio web.
         </p>
@@ -56,7 +56,7 @@
       <!-- Repite secciones según sea necesario -->
 
       <section>
-        <h2 class="text-2xl font-bold mt-4 mx-4">Informacion que recogemos</h2>
+        <h2 class="text-2xl font-bold mt-4 mx-4">Información que recogemos</h2>
         <p class="text-justify mx-4">
           Nuestra web recopila datos para operar de manera efectiva y brindarle las mejores experiencias con
           nuestros servicios. Usted proporciona algunos de estos datos directamente, como cuando crea una
@@ -140,7 +140,7 @@ export default {
   padding: 35px;
   background: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente para mejorar la legibilidad */
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.629);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .privacy-policy h1, h2 {

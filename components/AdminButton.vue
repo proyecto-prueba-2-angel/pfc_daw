@@ -1,8 +1,8 @@
 <template>
   <div v-if="isAuthenticated" class="admin-button cursor-pointer hover:shine-effect">
     <a class="flex items-center justify-center bg-red-600 hover:bg-red-800 text-white hover:text-gray-200 font-bold py-2 px-4 rounded-full shadow-lg" @click.prevent="goToAdmin">
-      <font-awesome-icon icon="screwdriver-wrench" />
-      &nbsp; Administrador
+      <font-awesome-icon icon="screwdriver-wrench" class="md:mr-2" />
+      <span class="hidden md:inline">&nbsp; Administrador</span>
     </a>
   </div>
 </template>
@@ -34,11 +34,20 @@ onMounted(() => {
 });
 </script>
 
-  <style scoped>
+<style scoped>
+.admin-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
   .admin-button {
-    position: fixed;
-    bottom: 20px;
+    top: 120px; /* Ajusta según la altura del header */
+
+    bottom: auto;
     right: 20px;
-    z-index: 1000; /* nos aseguramos que esté encima siempre */
   }
-  </style>
+}
+</style>

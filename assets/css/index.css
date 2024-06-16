@@ -37,7 +37,7 @@
   bottom: 30%; /* Centra verticalmente */
   cursor: pointer;
   z-index: 10; /* Asegúrate de que esté por encima del carrusel */
-  color: #ececec; /* Cambia el color según tu preferencia */
+  color: #ffffff; /* Cambia el color según tu preferencia */
   font-size: 80px; /* Ajusta el tamaño del ícono */
 }
 
@@ -122,8 +122,9 @@ a {
   width: 20%; /* Cubre la mitad de la anchura del contenedor */
   height: 100%;
   transform: translate(50%);
-  background-color: rgba(21, 24, 29, 0.925); /* Fondo blanco translúcido */
+  background-color: rgb(8, 8, 8); /* Fondo blanco translúcido */
   z-index: 2;
+  border: #bebebe double 4px;
 }
 
 .links-container2 {
@@ -142,7 +143,7 @@ a {
   opacity: 0;
   transform: translateX(-100%);
   transition: opacity 0.5s ease, transform 0.5s ease;
-  padding: 10px;
+  padding: 5px;
 }
 
 /* Texto descriptivo sección enlaces de cocinas */
@@ -161,6 +162,13 @@ a {
   transform: translateX(-100%);
   animation: slideText 0.5s forwards;
 }
+.logo-image {
+  width: auto;
+  max-width: 80%;
+  height: auto;
+  max-height: 80px; /* Ajusta este valor según sea necesario */
+}
+
 
 /* Define la animación */
 @keyframes slideText {
@@ -197,15 +205,6 @@ a {
   transform: translateX(-50%);
 }
 
-#header1 {
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #ffffff; /* Fundo transparente */
-  color: #fff; /* Cor do texto do cabeçalho */
-  padding: 10px; /* Espaçamento interno */
-  z-index: 1000; /* Certifique-se de que o cabeçalho esteja acima de outros elementos */
-}
 
 #carousel {
   position: relative;
@@ -853,7 +852,7 @@ a {
   height: 30px;
   line-height: 1;
   padding: 8px 16px;
-  background-color: #00264e;
+  background-color: #000000;
   color: white;
   font-weight:bold;
   border: none;
@@ -867,7 +866,7 @@ a {
 
 
 .style-button:hover {
-  background-color: #0056b3;
+  background-color: #252525;
 }
 
 .close-btn {

@@ -4,9 +4,8 @@
     <SubirBoton />
     <AdminButton />
     <Cookies />
-    <StarBackground />
 
-    <div class="cookie-policy-container mx-8 my-16 border-1 border-zinc-950 rounded-lg shadow-zinc-950 shadow-md p-8 bg-gray-800 text-gray-800">
+    <div class="cookie-policy-container mx-8 my-16 border-1 border-zinc-950 rounded-lg shadow-zinc-950 shadow-md p-8 text-black">
       <h1 class="shine-effect font-extrabold uppercase text-2xl lg:text-4xl mb-6 text-center">Política de Cookies</h1>
       <p class="text-justify mb-4">
         En <b>Eurostone</b>, utilizamos cookies para mejorar su experiencia en nuestro sitio web. Las cookies son pequeños archivos de texto que se almacenan en su dispositivo cuando visita nuestro sitio. Nos ayudan a recordar sus preferencias y a mejorar nuestros servicios.
@@ -35,7 +34,7 @@
       </p>
       <h2 class="font-bold text-xl lg:text-2xl mt-6 mb-4">Contacto</h2>
       <p class="text-justify mb-4">
-        Si tiene alguna pregunta sobre nuestra política de cookies, puede contactarnos en <a href="mailto:info@eurostone.com" class="underline text-blue-400">info@eurostone.com</a>.
+        Si tiene alguna pregunta sobre nuestra política de cookies, puede contactarnos en <a href="mailto:eurostonesl@gmail.com" class="underline text-blue-700">eurostonesl@gmail.com </a> , o hacernos una consulta a través de nuestro <a href="/contacto" target="_blank" class="font-bold">formulario</a>
       </p>
     </div>
     <Footer />
@@ -48,13 +47,12 @@ export default {
 }
 </script>
 
-  <style scoped>
-  .cookie-policy-container {
-    background: url('/images/marble_background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+<style scoped>
+.cookie-policy-container {
 
-  }
-  </style>
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgba(212, 212, 212, 0.9); /* Fondo blanco con opacidad */
+}
+</style>

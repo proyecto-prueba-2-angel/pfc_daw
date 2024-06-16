@@ -1,5 +1,5 @@
 <template>
-  <div class="canteras bg-gray-200">
+  <div class="canteras bg-gray-300">
     <Header />
     <Cookies />
     <SubirBoton />
@@ -28,13 +28,17 @@
           </p>
         </div>
       </div>
+      <div id="galeria"></div>
     </div>
+
     <!-- Sección de la galería de imágenes -->
-    <div id="galeria" class="container mx-auto p-5 my-12">
-      <h1 class="text-2xl font-bold text-center mb-8">Galería de Canteras</h1>
+    <div class="container mx-auto p-5 my-12">
+      <h1 class="text-2xl font-bold text-center mb-8 mt-12 uppercase">Galería de Canteras</h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div v-for="(image, index) in images" :key="index" class="cursor-pointer">
-          <img :src="image.src" :alt="image.alt" class="w-full h-auto shadow-lg transition duration-300 hover:shadow-2xl" @click="openModal(index)">
+          <div class="image-container">
+            <img :src="image.src" :alt="image.alt" class="gallery-img shadow-lg transition duration-300 hover:shadow-2xl" @click="openModal(index)">
+          </div>
           <p class="text-center mt-2 font-semibold">{{ image.title }}</p>
         </div>
       </div>
@@ -42,7 +46,7 @@
       <!-- Modal para ver la imagen ampliada -->
       <TransitionRoot as="template" :show="isModalOpen">
         <Dialog as="div" class="fixed inset-0 z-10 overflow-y-auto" @close="isModalOpen = false">
-          <div class="min-h-screen px-4 text-center">
+          <div class="min-h-screen px-4 text-center modal-container">
             <TransitionChild as="template" enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
               <DialogOverlay class="fixed inset-0 bg-black bg-opacity-30" />
             </TransitionChild>
@@ -56,10 +60,10 @@
                       <h2 class="text-3xl font-bold mb-4">{{ currentImage.title }}</h2>
                       <p class="mb-4">{{ currentImage.description }}</p>
                       <p class="mb-4">{{ currentImage.description2 }}</p>
-                      <button class="bg-gray-950 text-gray-300 font-bold rounded-lg p-4 mt-4 animate-fade" @click="goToMaterials(image.title)">
-                        CONSULTAR MATERIAL
-                      </button>
-
+                      <div>
+                        <p class="text-xl font-bold mb-2">Material Destacado: {{ currentImage.highlightedMaterial }}</p>
+                        <img :src="currentImage.materialImage" alt="Imagen del material destacado" class="w-full h-auto rounded mt-2 material-img" />
+                      </div>
                     </div>
                   </div>
                   <div class="mt-8">
@@ -76,7 +80,6 @@
     </div>
     <Footer />
   </div>
-
 </template>
 
 <script setup>
@@ -92,12 +95,12 @@ setTimeout(() => {
 }, 200);
 
 const images = ref([
-  { src: '/images/fotos/02.jpg', alt: 'Descripción de la imagen 1', title: 'MONTE COTO', description: 'Desde nuestra cantera del Monte Coto, ubicada en las localidades de Pinoso y Algueña en Alicante - España -, obtenemos la materia prima de mármol Crema Marfil en bloques que, posteriormente elaboramos en nuestra fábrica de Novelda.', description2: 'Se localiza en el término municipal de Monóvar, en la provincia de Alicante, y posee una superficie de 763,75ha. Monte Coto se encuentra ubicado en la sierra del Reclot. Dicha sierra ocupa una extensión aproximada de 2.400 ha, de las cuales aproximadamente 760 ha pertenecen al término de Monóvar.' },
-  { src: '/images/fotos/12.jpg', alt: 'Descripción de la imagen 2', title: 'LA ENCINA', description: 'Esta es nuestra cantera de Marron Emperador, también conocida como Dark Emperador. Ubicada en la provincia de Alicante, se obtiene material de primera calidad elaborado en nuestra fábrica de Novelda.', description2: 'Control de calidad. Procedimientos respetuosos con el medioambiente. Exportación. Experiencia. Proceso propio de extracción.' },
-  { src: '/images/fotos/13.jpg', alt: 'Descripción de la imagen 3', title: 'ZARCILLA DE RAMOS', description: 'Nuestra cantera de material Rosa Zarci, ubicada en Murcia, nos aporta material de estas características para ser elaborado en la fábrica de Novelda manteniendo nuestros estándares de calidad.', description2: 'Control de calidad. Procedimientos respetuosos con el medioambiente. Exportación. Experiencia. Proceso propio de extracción.' },
-  { src: '/images/fotos/12.jpg', alt: 'Descripción de la imagen 4', title: 'LOS GUILLENES', description: 'Este material lo obtenemos de nuestra cantera ubicada en la Provincia de Almería. El tipo de material es una marca registrada de EUROSTONE S.A., y se comercializa en exclusividad por nosotros.', description2: 'Control de calidad. Procedimientos respetuosos con el medioambiente. Exportación. Experiencia. Proceso propio de extracción.' },
-  { src: '/images/fotos/02.jpg', alt: 'Descripción de la imagen 5', title: 'MARAVILLAS', description: 'Otra de nuestras canteras, aunque sea más pequeña pero igualmente importante, es la Cantera de Crema Magdala ubicada en la provincia de Murcia.', description2: 'Control de calidad. Procedimientos respetuosos con el medioambiente. Exportación. Experiencia. Proceso propio de extracción.' },
-  { src: '/images/fotos/13.jpg', alt: 'Descripción de la imagen 6', title: 'LA REPLANA', description: 'Disponemos de cantera propia de mármol Rojo Alicante. En el apartado acabados podrán ver las terminaciones que fabricamos para nuestros clientes.', description2: 'Control de calidad. Procedimientos respetuosos con el medioambiente. Exportación. Experiencia. Proceso propio de extracción.' }
+  { src: '/images/monteCoto.jpg', alt: 'Monte Coto', title: 'MONTE COTO', description: 'Desde nuestra cantera del Monte Coto, ubicada en las localidades de Pinoso y Algueña en Alicante - España -, obtenemos la materia prima de mármol Crema Marfil en bloques que, posteriormente elaboramos en nuestra fábrica de Novelda.', description2: 'Se localiza en el término municipal de Monóvar, en la provincia de Alicante, y posee una superficie de 763,75ha. Monte Coto se encuentra ubicado en la sierra del Reclot. Dicha sierra ocupa una extensión aproximada de 2.400 ha, de las cuales aproximadamente 760 ha pertenecen al término de Monóvar.', highlightedMaterial: 'Crema Marfil', materialImage: '/images/cremam2.jpg' },
+  { src: '/images/laEncina.jpg', alt: 'La Encina', title: 'LA ENCINA', description: 'Esta es nuestra cantera de Marron Emperador, también conocida como Dark Emperador. Ubicada en la provincia de Alicante, se obtiene material de primera calidad elaborado en nuestra fábrica de Novelda.', description2: 'Control de calidad. Procedimientos respetuosos con el medioambiente. Exportación. Experiencia. Proceso propio de extracción.', highlightedMaterial: 'Marron Emperador', materialImage: '/images/marremp1.jpg' },
+  { src: '/images/zarciCantera.jpg', alt: 'Zarcilla de Ramos', title: 'ZARCILLA DE RAMOS', description: 'Nuestra cantera de material Rosa Zarci, ubicada en Murcia, nos aporta material de estas características para ser elaborado en la fábrica de Novelda manteniendo nuestros estándares de calidad.', description2: 'Control de calidad. Procedimientos respetuosos con el medioambiente. Exportación. Experiencia. Proceso propio de extracción.', highlightedMaterial: 'Rosa Zarci', materialImage: '/images/rosazarc2.png' },
+  { src: '/images/losGuillenes.jpg', alt: 'Los Guillenes', title: 'LOS GUILLENES', description: 'Este material lo obtenemos de nuestra cantera ubicada en la Provincia de Almería. El tipo de material es una marca registrada de EUROSTONE S.A., y se comercializa en exclusividad por nosotros.', description2: 'Control de calidad. Procedimientos respetuosos con el medioambiente. Exportación. Experiencia. Proceso propio de extracción.', highlightedMaterial: 'Orvell', materialImage: '/images/orvell1.png' },
+  { src: '/images/canteraMagdala.jpg', alt: 'Maravillas', title: 'MARAVILLAS', description: 'Otra de nuestras canteras, aunque sea más pequeña pero igualmente importante, es la Cantera de Crema Magdala ubicada en la provincia de Murcia.', description2: 'Control de calidad. Procedimientos respetuosos con el medioambiente. Exportación. Experiencia. Proceso propio de extracción.', highlightedMaterial: 'Crema Magdala', materialImage: '/images/cremag1.jpg' },
+  { src: '/images/cantRojo.jpg', alt: 'La Replana', title: 'LA REPLANA', description: 'Disponemos de cantera propia de mármol Rojo Alicante. En el apartado acabados podrán ver las terminaciones que fabricamos para nuestros clientes.', description2: 'Control de calidad. Procedimientos respetuosos con el medioambiente. Exportación. Experiencia. Proceso propio de extracción.', highlightedMaterial: 'Rojo Alicante', materialImage: '/images/rojlc1.jpg' }
 ]);
 
 const isModalOpen = ref(false);
@@ -106,10 +109,6 @@ const currentImage = ref({});
 function openModal(index) {
   currentImage.value = images.value[index];
   isModalOpen.value = true;
-}
-
-function goToMaterials(materialTitle) {
-  $router.push({ path: '/materials', query: { material: materialTitle } });
 }
 
 function scrollToSection(sectionId) {
@@ -125,6 +124,36 @@ function scrollToSection(sectionId) {
   position: relative;
   text-align: center;
   overflow: hidden;
+}
+
+.image-container {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.material-img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.modal-container {
+  margin-top: 8rem; /* Incrementa el margen superior para evitar solapamiento con el header */
+}
+
+@media (max-width: 768px) {
+  .modal-container {
+    padding-top: 0rem; /* Incrementa el padding superior para móviles */
+  }
 }
 
 @keyframes fade-in-down {
