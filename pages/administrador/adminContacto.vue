@@ -71,7 +71,21 @@ export default {
   created() {
     this.fetchContacts();
   },
+  mounted() {
+    this.updateHead();
+  },
   methods: {
+    updateHead() {
+      document.title = 'Administrar Contactos - Eurostone';
+      const descriptionContent = 'Administrar las solicitudes de contacto.';
+      let descriptionMetaTag = document.querySelector('meta[name="description"]');
+      if(!descriptionMetaTag) {
+        descriptionMetaTag = document.createElement('meta');
+        descriptionMetaTag.setAttribute('name', 'description');
+        document.head.appendChild(descriptionMetaTag);
+      }
+      descriptionMetaTag.setAttribute('content', descriptionContent);
+    },
     fetchContacts() {
       fetch(`http://localhost/PFC/fetch_contacts.php?page=${this.currentPage}&pageSize=${this.pageSize}`)
         .then(response => response.json())

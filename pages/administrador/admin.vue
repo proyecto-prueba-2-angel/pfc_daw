@@ -4,8 +4,8 @@
     <div class="flex-grow bg-gray-50">
       <div class="container mx-auto px-4 py-16 bg-gray-300 shadow-lg rounded-lg mt-6">
         <div class="text-center">
-          <h1 class="text-3xl font-bold mb-8 text-gray-800">
-            Panel de Administración
+          <h1 class="text-3xl font-bold mb-8 text-gray-800 uppercase">
+            Panel de Administrador
           </h1>
           <button class="btn-logout mb-10" @click="logOut">
             <font-awesome-icon icon="sign-out-alt" class="mr-2" />
@@ -36,7 +36,27 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '~/stores/auth';
-
+useHead({
+  title: 'Panel de administrador - Eurostone',
+  meta: [
+    {
+      name: 'description',
+      content: 'Realizar consultas y solicitudes, desde aquí.'
+    },
+    {
+      property: 'og:title',
+      content: 'Panel de administrador - Eurostone'
+    },
+    {
+      property: 'og:description',
+      content: 'Realizar consultas y solicitudes, desde aquí.'
+    },
+    {
+      property: 'og:image',
+      content: 'https://example.com/path/to/your/image.jpg'
+    }
+  ]
+})
 definePageMeta({
   middleware: 'admin'
 });

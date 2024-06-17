@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen bg-gray-500">
+  <div class="flex flex-col min-h-screen bg-zinc-600">
     <Header />
     <Cookies />
     <div class="flex-grow">
@@ -41,7 +41,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '~/stores/auth';
 useHead({
-  title: 'Entrar como administradoe - Eurostone',
+  title: 'Entrar como administrador - Eurostone',
   meta: [
     {
       name: 'description',

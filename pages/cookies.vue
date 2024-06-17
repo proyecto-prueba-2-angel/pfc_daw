@@ -41,18 +41,18 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'CookiePolicy',
-  head() {
-    return {
-      title: 'Política de cookies - Eurostone',
-      description: 'Página de política de cookies de Eurostone'
-    }
-  }
-}
-</script>
+<script setup>
 
+useHead({
+  title: 'Política de cookies - Eurostone',
+  meta: [
+    {
+      name: 'description',
+      content: 'Página de política de cookies de Eurostone'
+    }
+  ]
+});
+</script>
 <style scoped>
 .cookie-policy-container {
 

@@ -3,7 +3,7 @@
     <div class="max-w-screen-xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-12 text-center lg:text-left">
       <!-- Logotipo y breve descripción de la empresa -->
       <div class="mb-6 lg:mb-0 flex flex-col items-center lg:items-start">
-        <img src="/public/images/EUROSTONE_MARMOLES_PIDRAS_300_rv01.png" alt="Eurostone Logo" class="mb-4 w-48">
+        <img src="/images/EUROSTONE_MARMOLES_PIDRAS_300_rv01.png" alt="Eurostone Logo" class="mb-4 w-48">
         <p class="font-semibold text-lg text-gray-100 mb-2">EUROSTONE S.A.</p>
         <p class="text-sm">Líderes en el mercado de mármol y piedra, con más de 50 años de experiencia.</p>
       </div>

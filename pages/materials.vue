@@ -8,10 +8,10 @@
     <div class="flex flex-col items-center justify-center flex-grow">
       <div class="relative w-full">
         <!-- Imagen de fondo con brillo controlado dinámicamente -->
-        <img :class="brightnessClass" src="/images/fotos/07.jpg" alt="Luxurious Marble Interior" class="w-full h-screen object-cover animate-fade transition-all duration-1000">
+        <img :class="brightnessClass" src="/images/fotos/03.jpg" alt="Materiales en Fabrica" class="w-full h-screen object-cover animate-fade transition-all duration-1000">
         <!-- Contenedor de texto con animación de revelación de caracteres -->
         <div class="absolute top-1/4 w-full text-center px-4 sm:px-8 md:px-16 lg:px-32">
-          <h1 class="shine-effect text-6xl md:text-9xl font-bold text-white mb-16">
+          <h1 class="shine-effect text-6xl sm:text-7xl md:text-9xl font-bold text-white mb-16">
             <span
               v-for="(char, index) in titleChars" :key="index"
               :class="['revealText', index % 2 === 0 ? 'animate-fade-in-down' : 'animate-fade-in-up']"
@@ -20,7 +20,7 @@
               {{ char }}
             </span>
           </h1>
-          <button class="bg-gray-950 text-gray-300 font-bold rounded-lg p-2 sm:p-4 md:p-6 my-4 md:my-8 animate-jump-in animate-delay-[1500ms]" @click="scrollToMateriales">
+          <button class="bg-gray-950 text-gray-300 font-bold rounded-lg p-4 my-8 animate-jump-in animate-delay-[1500ms]" @click="scrollToMateriales">
             DESCUBRE LOS MATERIALES
           </button>
           <p class="text-lg sm:text-xl md:text-2xl text-white max-w-3xl mx-auto animate-fade-up animate-delay-1000">
@@ -35,7 +35,7 @@
         <div class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 bg-white shadow-lg p-6 rounded-lg">
           <!-- Contenedor de imagen -->
           <div class="w-full md:w-1/4">
-            <img src="/images/fotos/07.jpg" alt="Random Image from Unsplash" class="w-full rounded-lg shadow-md">
+            <img src="/images/fotos/07.jpg" alt="Material" class="w-full rounded-lg shadow-md">
           </div>
           <!-- Contenedor de texto -->
           <div class="w-full md:w-2/3">
@@ -53,7 +53,7 @@
       <!-- Contenido de cortinas -->
       <!-- Primer div con imagen y transición de derecha a izquierda -->
       <div class="full-screen-image-container hidden md:flex my-8 mx-8 border-1 border-zinc-950 rounded-lg shadow-zinc-950 shadow-md">
-        <img src="/images/marfilxl.jpg" alt="Imagen" class="full-screen-image" />
+        <img src="/images/marfilxl.jpg" alt="Crema Marfil" class="full-screen-image" />
         <div id="cortina" :class="{ 'show': showContent }" class="content text-justify relative">
           <h1 class="uppercase transition-transform duration-500 ease-in-out transform cursor-pointer shine-effect hover:translate-x-2 hover:opacity-90 text-2xl md:text-4xl">
             CREMA MARFIL
@@ -100,7 +100,7 @@
       <div class="mb-8">
         <!-- Segundo div con imagen y transición de izquierda a derecha -->
         <div class="second-image-container hidden md:flex mx-8 my-16 border-1 border-zinc-950 rounded-lg shadow-zinc-950 shadow-md">
-          <img src="/images/marron2xl.jpg" alt="Otra Imagen" class="second-image" />
+          <img src="/images/marron2xl.jpg" alt="Marron Emperador" class="second-image" />
           <div id="second-cortina" :class="{ 'show': secondShowContent }" class="content2 text-justify relative">
             <div class="second-text">
               <h1 class="uppercase transition-transform duration-500 ease-in-out transform shine-effect cursor-pointer text-left hover:translate-x-2 hover:opacity-90 text-2xl md:text-4xl">MARRON EMPERADOR</h1>
@@ -146,7 +146,7 @@
       <div class="mb-8">
         <!-- Tercer div, similar al primero -->
         <div class="third-image-container hidden md:flex mx-8 my-16 border-1 border-zinc-950 rounded-lg shadow-zinc-950 shadow-md">
-          <img src="/images/rosazarc2.jpg" alt="Imagen" class="third-image" />
+          <img src="/images/rosazarc2.jpg" alt="Rosa Zarci" class="third-image" />
           <div id="third-cortina" :class="{ 'show': thirdShowContent }" class="content text-justify relative">
             <h1 class="uppercase transition-transform duration-500 ease-in-out transform cursor-pointer shine-effect text-left hover:translate-x-2 hover:opacity-90 text-2xl md:text-4xl">
               ROSA ZARCI
@@ -184,7 +184,7 @@
           </div>
         </div>
         <div class="w-1/2 p-8 space-y-4">
-          <img src="/public/images/rosa1.jpg" alt="ROSA ZARCI" class="brightness-90 rounded-lg shadow-xl mx-auto">
+          <img src="/images/rosa1.jpg" alt="ROSA ZARCI" class="brightness-90 rounded-lg shadow-xl mx-auto">
           <p class="text-justify">
             El mármol Rosa Zarci es una excelente elección para proyectos que requieren una estética refinada y sofisticada. Su durabilidad y resistencia lo hacen ideal para aplicaciones tanto en interiores como en exteriores.
           </p>
@@ -194,7 +194,7 @@
       <div class="mb-8">
         <!-- Cuarto div, similar al segundo -->
         <div class="fourth-image-container hidden md:flex mx-8 my-16 border-1 border-zinc-950 rounded-lg shadow-zinc-950 shadow-md">
-          <img src="/images/fotos/marmol-travertino.png" alt="Otra Imagen" class="fourth-image" />
+          <img src="/images/fotos/marmol-travertino.png" alt="Orvell" class="fourth-image" />
           <div id="fourth-cortina" :class="{ 'show': fourthShowContent }" class="content2 text-justify relative">
             <div class="fourth-text">
               <h1 class="uppercase transition-transform duration-500 ease-in-out transform shine-effect cursor-pointer text-left hover:translate-x-2 hover:opacity-90 text-2xl md:text-4xl">ORVELL</h1>
@@ -239,7 +239,7 @@
       <div class="mb-8">
         <!-- Quinto div, similar al primero -->
         <div class="fifth-image-container hidden md:flex mx-8 my-16 border-1 border-zinc-950 rounded-lg shadow-zinc-950 shadow-md">
-          <img src="/images/cream3.jpg" alt="Imagen" class="fifth-image" />
+          <img src="/images/cream3.jpg" alt="Crema Magdala" class="fifth-image" />
           <div id="fifth-cortina" :class="{ 'show': fifthShowContent }" class="content text-justify relative">
             <h1 class="uppercase transition-transform duration-500 ease-in-out transform cursor-pointer shine-effect text-left hover:translate-x-2 hover:opacity-90 text-2xl md:text-4xl">
               CREMA MAGDALA
@@ -371,7 +371,7 @@
     </div>
 
     <div class="relative w-full">
-      <img src="/images/fotos/03.jpg" alt="Ver acabados" class="w-full object-cover h-64">
+      <img src="/images/fotos/03.jpg" alt="Ver acabados - Imagen larga" class="w-full object-cover h-64">
       <button class="absolute bottom-4 right-4 bg-gray-200 text-black font-bold py-2 px-4 rounded hover:bg-zinc-900 hover:text-white transition duration-300" @click="$router.push('/finishes')">
         Ver acabados
       </button>
@@ -432,7 +432,7 @@ const materials = ref([
   },
   {
     name: 'ORVELL',
-    image: '/images/fondo1.png',
+    image: '/images/fotos/marmol-travertino.png',
     description: 'Este material lo obtenemos de nuestra cantera en Almería, comercializado en exclusiva por EUROSTONE.',
     specifications: [
       'Densidad: 2,72 gr/cm³',
@@ -582,6 +582,7 @@ function closeModal() {
 </script>
 
 <style scoped>
+
 .hero-container {
   position: relative;
   text-align: center;
@@ -621,7 +622,7 @@ function closeModal() {
 .mat_seccion {
   padding-bottom: 4rem; /* Añade un padding al fondo para empujar el footer hacia abajo */
 }
-/* Estilos para el contenido de pages > *cocinas.vue*/
+/* Estilos
 
   /* Estilo del hero container */
 
@@ -686,7 +687,6 @@ function closeModal() {
   background: rgba(0, 0, 0, 0.8); /* Fondo oscuro para mejorar la legibilidad */
   color: white;
   padding: 20px; /* Aumenta el padding para más espacio alrededor del contenido */
-  border-left: 5px solid #ff0707; /* Un toque de color */
   transition: background-color 0.3s ease;
 }
 .content2 {

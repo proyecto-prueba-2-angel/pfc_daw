@@ -1,160 +1,165 @@
 <template>
-  <div class="overflow-x-hidden">   <!-- Sin usar -->
-    <Header />   <!-- Sin Usar -->
+  <div class=" bg-gray-200">
+    <Header />
     <SubirBoton />
     <AdminButton />
     <Cookies />
+    <div class="overflow-x-hidden">
 
-    <!-- Carrusel inicial -->
-    <div id="carousel" class="container2">
-      <div class="carousel-slider">
-        <div class="slide-wrapper" :style="wrapperStyle">
-          <div v-for="(slide, index) in slides" :key="index" class="slide-content">   <!-- Para u los slides cogemos un v-for -->
-            <img id="img1" :src="slide.imageSrc" :alt="slide.title" class="brightness-75" />
+      <!-- Carrusel inicial -->
+      <div id="carousel" class="container2">
+        <div class="carousel-slider">
+          <div class="slide-wrapper" :style="wrapperStyle">
+            <div v-for="(slide, index) in slides" :key="index" class="slide-content">   <!-- Para u los slides cogemos un v-for -->
+              <img id="img1" :src="slide.imageSrc" :alt="slide.title" class="brightness-75" />
+            </div>
           </div>
-        </div>
-        <div class="next-slide-preview hidden sm:block" :class="{ 'animate-slide': animating }">
-          <div>
-            <img id="img2" :src="nextSlideImg" />  <!-- Sin usar -->
+          <div class="next-slide-preview hidden sm:block" :class="{ 'animate-slide': animating }">
+            <div>
+              <img id="img2" :src="nextSlideImg" />  <!-- Sin usar -->
+            </div>
+            <div class="next-arrow" @click="goToNextSlide">
+              <a class="p-2 md:p-5 font-bold hover:bg-zinc-950 hover:opacity-75 rounded-md transition duration-500 ease-in-out">{{ nextSlideTitle }}</a> <!-- Asumiendo que usas Font Awesome -->
+            </div>
           </div>
-          <div class="next-arrow" @click="goToNextSlide">
-            <a class="p-2 md:p-5 font-bold hover:bg-zinc-950 hover:opacity-75 rounded-md transition duration-500 ease-in-out">{{ nextSlideTitle }}</a> <!-- Asumiendo que usas Font Awesome -->
-          </div>
-        </div>
 
-        <!-- Botón que dirige a la página correspondiente al slide -->
-        <NuxtLink class="slide-title" :class="{ 'animate-slide': animating }" :to="currentSlide.link">
-          <h2 class="bg-[rgba(255,255,255,0.84)] sm:bg-[rgba(255,255,255,0.4)] p-2 md:p-5 hover:opacity-75 hover:bg-orange-800 hover:text-gray-200 mx-auto rounded-md font-extrabold transition duration-500 ease-in-out slide-title2 text-3xl sm:text-4xl md:text-5xl" style="text-align: center;">{{ currentSlide.title }}</h2>
-        </NuxtLink>
+          <!-- Botón que dirige a la página correspondiente al slide -->
+          <NuxtLink class="slide-title" :class="{ 'animate-slide': animating }" :to="currentSlide.link">
+            <h2 class="bg-[rgba(255,255,255,0.84)] sm:bg-[rgba(255,255,255,0.4)] p-2 md:p-5 hover:opacity-75 hover:bg-orange-800 hover:text-gray-200 mx-auto rounded-md font-extrabold transition duration-500 ease-in-out slide-title2 text-3xl sm:text-4xl md:text-5xl" style="text-align: center;">{{ currentSlide.title }}</h2>
+          </NuxtLink>
 
-        <div class="navigation-buttons">
-          <button
-            v-for="(slide, index) in slides"
-            :key="index"
-            :class="{'active': index === currentSlideIndex, 'inactive': index !== currentSlideIndex}"
-            class="bg-white w-3 h-3 md:w-6 md:h-6 rounded-full shadow-lg focus:animate-pulse"
-            @click="goToSlide(index)"
-          >
-          <!-- Los botones ahora no tienen texto/contenido visible -->
-          </button>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="bottom-content bg-zinc-900 mt-8 p-2 md:p-8 flex flex-col md:flex-row items-center">
-      <div class="md:w-2/5 p-4">
-        <img src="/images/fotos/02.jpg" class="w-full rounded-md brightness-90">
-      </div>
-      <div class="md:w-1/2 mt-4 md:mt-0 md:ml-8 flex flex-col items-center md:items-start">
-        <img src="/images/EUROSTONE_MARMOLES_PIDRAS_300_rv01.png" class="logo-image p-4 rounded-md">
-        <h2 class="text-xl md:text-2xl font-bold mt-4 md:mt-8 text-white text-center md:text-left">Fábrica de mármoles y piedras</h2>
-        <div class="max-w-xl">
-          <p class="mt-2 md:mt-4 text-justify text-base md:text-lg leading-loose text-white">
-            Explora el corazón de <b>Eurostone</b> en nuestras oficinas centrales. Desde aquí se gestiona toda <b>nuestra operación</b>, donde cada detalle está cuidadosamente diseñado para fomentar la <b>colaboración</b> y la <b>innovación</b>. Sumérgete en un ambiente profesional y acogedor que refleja nuestra dedicación a la <b>calidad</b> y al <b>servicio excepcional</b>.
-          </p>
-          <div class="flex items-center hover:underline space-x-2 mt-4">
-            <div style="background-color: red; width: 20px; height: 20px;"></div>
-            <a href="/nosotros" class="text-white">Leer más <font-awesome-icon icon="book" /></a>
+          <div class="navigation-buttons">
+            <button
+              v-for="(slide, index) in slides"
+              :key="index"
+              :class="{'active': index === currentSlideIndex, 'inactive': index !== currentSlideIndex}"
+              class="bg-white w-3 h-3 md:w-6 md:h-6 rounded-full shadow-lg focus:animate-pulse"
+              @click="goToSlide(index)"
+            >
+              <!-- Los botones ahora no tienen texto/contenido visible -->
+            </button>
           </div>
-        </div>
-      </div>
-    </div>
-    <!-- Texto informativo #2 -->
-    <div class="bottom-content2 ">
-      <div class="flex flex-col items-center px-4 sm:px-8 md:px-16 lg:px-32">
-        <b class="mt-8 lg:text-4xl md:text-2xl lg:px-16 md:px-12 sm:px-8 sm:text-lg uppercase text-white bg-orange-800 border-2 border-blue p-2 rounded-xl">Los acabados</b>
-        <h3 class="mt-5 mb-6 text-xs sm:text-sm md:text-base lg:text-xl leading-relaxed text-justify">
-          En Eurostone, comprendemos que el <b>acabado</b> de cada pieza de <b>mármol</b> o <b>piedra natural</b> es fundamental para destacar la <b>belleza</b> y el <b>carácter único</b> de cada espacio. Ofrecemos una amplia variedad de <b>acabados</b> que transforman estos materiales naturales en expresiones de arte. Desde <b>acabados pulidos</b> que reflejan la luz, hasta <b>texturas rugosas</b> que resaltan la autenticidad del material, cada uno está diseñado para cumplir con las expectativas <b>estéticas</b> y <b>funcionales</b> de nuestros clientes. Con Eurostone, cada elección de <b>acabado</b> es una oportunidad para enaltecer y personalizar su espacio con <b>elegancia</b> y <b>estilo duraderos</b>.
-        </h3>
-      </div>
 
-      <!-- Para tamaños de pantalla grande, imagen con enlaces -->
-      <div class="relative w-full hidden md:block">
-        <div class="flex flex-col items-end">
-          <div class="image-container2">
-            <img id="mainImage" src="/images/fotos/acabadosintro.jpg" alt="Imagen de acabado" class="brightness-105">
-            <p id="imageDescription" class="bg-gray-900 text-white text-lg font-bold pl-4 py-2 hidden lg:block">Pasa el cursor sobre los enlaces</p>
-          </div>
-          <div class="translucent-background"></div>
-          <div class="links-container2 absolute flex flex-col px-2 uppercase">
-            <a class="link rounded-md bg-transparent text-white text-2xl mt-3 mb-3 font-bold" href="/finishes" @mouseover="changeImage('/images/enbruto1.png', 'Mármol en bruto - Estado natural del mármol sin tratar.')">En Bruto</a>
-            <a class="link rounded-md bg-transparent text-white text-xl mt-3 mb-3 font-bold" href="/finishes" @mouseover="changeImage('/images/envejecido2.jpg', 'Mármol envejecido - Acabado que proporciona una apariencia antigua.')">Envejecido</a>
-            <a class="link rounded-md  bg-transparent text-white text-xl mt-3 mb-3 font-bold" href="/finishes" @mouseover="changeImage('/images/acabado1.jpg', 'Mármol pulido - Superficie lisa y brillante que refleja la luz.')">Pulido</a>
-            <a class="link rounded-md bg-transparent text-white text-xl mt-3 mb-3 font-bold" href="/finishes" @mouseover="changeImage('/images/apomazado1.jpg', 'Mármol apomazado - Acabado mate y suave.')">Apomazado</a>
-            <a class="link rounded-md bg-transparent text-white text-xl mt-3 mb-3 font-bold" href="/finishes" @mouseover="changeImage('/images/abujardado1.jpg', 'Mármol abujardado - Superficie rugosa con textura.')">Abujardado</a>
-          </div>
         </div>
       </div>
 
-      <!-- Para tamaños de pantalla pequeña, botones para mostrarlas imágenes de una vez -->
-      <div class="relative w-full block md:hidden">
-        <div class="flex flex-wrap justify-center items-center">
-          <button class="style-button uppercase" @click="openModal('/images/enbruto1.png')">En Bruto</button>
-          <button class="style-button uppercase" @click="openModal('/images/envejecido2.jpg')">Envejecido</button>
-          <button class="style-button uppercase" @click="openModal('/images/acabado1.jpg')">Pulido</button>
-          <button class="style-button uppercase" @click="openModal('/images/apomazado1.jpg')">Apomazado</button>
-          <button class="style-button uppercase" @click="openModal('/images/abujardado1.jpg')">Abujardado</button>
+      <div class="bottom-content bg-zinc-900 mt-8 p-2 md:p-8 flex flex-col md:flex-row items-center">
+        <div class="md:w-2/5 p-4">
+          <img src="/images/fotos/02.jpg" alt="Eurostone Oficina" class="w-full rounded-md brightness-90">
         </div>
-        <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
-          <div class="relative bg-white p-4 rounded-lg">
-            <button class="absolute text-white top-2 right-2 bg-gray-950 p-1 rounded-md" @click="closeModal">Cerrar</button>
-            <img :src="modalImage" alt="Estilo de Mármol" class="max-w-full max-h-[70vh] h-auto object-contain" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Imagen larga con enlaces (no activos) -->
-    <div class="mt-10 flex justify-center items-center flex-col">
-      <img src="../public/images/fotos/01 VISTA GENERAL FÁBRICA.jpg" alt="Vista General de la Fábrica" class="max-w-full h-auto" />
-      <p class="pl-3 pr-3 bg-gray-950 text-white font-bold mt-4 py-2 rounded text-center text-sm sm:text-lg md:text-xl">VISTA GENERAL DE EUROSTONE</p>
-    </div>
-
-    <!-- Texto informativo #3 -->
-    <div class="bottom-content3">
-      <div class="flex flex-col items-center px-4 sm:px-8 md:px-16 lg:px-32">
-        <b class="mt-8 lg:text-4xl md:text-2xl lg:px-16 md:px-12 sm:px-8 sm:text-lg uppercase text-white bg-orange-800 border-2 border-blue p-2 rounded-xl mb-8 w-1/2 text-center"> MATERIALES </b>
-        <h3 class="mt-5 mb-6 text-xs sm:text-sm md:text-base lg:text-xl leading-relaxed text-justify">
-          En Eurostone, nos enorgullece ofrecer una amplia gama de <b>materiales</b> de la más alta calidad. Desde el clásico <b>mármol</b> hasta las piedras naturales más exóticas, cada uno de nuestros productos está seleccionado para garantizar <b>durabilidad</b> y <b>belleza</b> excepcionales. Nuestros <b>materiales</b> son perfectos para una variedad de aplicaciones, incluyendo <b>cocinas</b>, <b>baños</b>, <b>salones</b> y más. Descubra cómo nuestros <b>materiales</b> pueden transformar su espacio con <b>elegancia</b> y <b>sofisticación</b>.
-        </h3>
-        <Carousel :carouselItems="sliders" />
-
-      </div>
-
-      <div>
-
-      </div>
-
-      <div class="flex flex-col md:flex-row bg-gray-900 p-4 md:p-12 m-2 space-y-4 md:space-y-0">
-        <div class="flex items-center justify-center md:w-1/2">
-          <div class="w-full px-2 md:px-6">
-            <p class="text-black text-sm md:text-lg bg-gray-200 px-4 py-4 text-justify rounded-lg shadow-xl">
-              En Eurostone, nuestros cimientos están arraigados en una tradición de más de medio siglo. Durante más de <b>50 años</b>, hemos sido <b>pioneros</b> en la industria de la
-              <b>piedra natural</b>, llevando la <b>excelencia</b> y la <b>innovación</b> a cada paso del camino. Desde nuestros humildes comienzos hasta nuestra posición actual como <b>líderes del mercado</b>,
-              cada día nos esforzamos por <b>superar</b> las <b>expectativas</b> y continuar siendo un referente en <b>calidad</b> y <b>servicio</b>.
+        <div class="md:w-1/2 mt-4 md:mt-0 md:ml-8 flex flex-col items-center md:items-start">
+          <img src="/images/EUROSTONE_MARMOLES_PIDRAS_300_rv01.png" alt="Eurostone Logo" class="logo-image p-4 rounded-md">
+          <h2 class="text-xl md:text-2xl font-bold mt-4 md:mt-8 text-white text-center md:text-left">Fábrica de mármoles y piedras</h2>
+          <div class="max-w-xl">
+            <p class="mt-2 md:mt-4 text-justify text-base md:text-lg leading-loose text-white">
+              Explora el corazón de <b>Eurostone</b> en nuestras oficinas centrales. Desde aquí se gestiona toda <b>nuestra operación</b>, donde cada detalle está cuidadosamente diseñado para fomentar la <b>colaboración</b> y la <b>innovación</b>. Sumérgete en un ambiente profesional y acogedor que refleja nuestra dedicación a la <b>calidad</b> y al <b>servicio excepcional</b>.
             </p>
+            <div class="flex items-center hover:underline space-x-2 mt-4">
+              <div style="background-color: red; width: 20px; height: 20px;"></div>
+              <a href="/nosotros" class="text-white">Leer más <font-awesome-icon icon="book" /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Texto informativo #2 -->
+      <div class="bottom-content2 ">
+        <div class="flex flex-col items-center px-4 sm:px-8 md:px-16 lg:px-32">
+          <b class="mt-8 lg:text-4xl md:text-2xl lg:px-16 md:px-12 sm:px-8 sm:text-lg uppercase text-white bg-orange-800 border-2 border-blue p-2 rounded-xl">Los acabados</b>
+          <h3 class="mt-5 mb-6 text-xs sm:text-sm md:text-base lg:text-xl leading-relaxed text-justify">
+            En Eurostone, comprendemos que el <b>acabado</b> de cada pieza de <b>mármol</b> o <b>piedra natural</b> es fundamental para destacar la <b>belleza</b> y el <b>carácter único</b> de cada espacio. Ofrecemos una amplia variedad de <b>acabados</b> que transforman estos materiales naturales en expresiones de arte. Desde <b>acabados pulidos</b> que reflejan la luz, hasta <b>texturas rugosas</b> que resaltan la autenticidad del material, cada uno está diseñado para cumplir con las expectativas <b>estéticas</b> y <b>funcionales</b> de nuestros clientes. Con Eurostone, cada elección de <b>acabado</b> es una oportunidad para enaltecer y personalizar su espacio con <b>elegancia</b> y <b>estilo duraderos</b>.
+          </h3>
+        </div>
+
+        <!-- Para tamaños de pantalla grande, imagen con enlaces -->
+        <div class="relative w-full hidden md:block">
+          <div class="flex flex-col items-end">
+            <div class="image-container2">
+              <img id="mainImage" src="/images/fotos/acabadosintro.jpg" alt="Imagen de acabado" class="brightness-105">
+              <p id="imageDescription" class="bg-gray-900 text-white text-lg font-bold pl-4 py-2 hidden lg:block">Pasa el cursor sobre los enlaces</p>
+            </div>
+            <div class="translucent-background"></div>
+            <div class="links-container2 absolute flex flex-col px-2 uppercase">
+              <a class="link rounded-md bg-transparent text-white text-2xl mt-3 mb-3 font-bold" href="/finishes" @mouseover="changeImage('/images/enbruto1.png', 'Mármol en bruto - Estado natural del mármol sin tratar.')">En Bruto</a>
+              <a class="link rounded-md bg-transparent text-white text-xl mt-3 mb-3 font-bold" href="/finishes" @mouseover="changeImage('/images/envejecido2.jpg', 'Mármol envejecido - Acabado que proporciona una apariencia antigua.')">Envejecido</a>
+              <a class="link rounded-md  bg-transparent text-white text-xl mt-3 mb-3 font-bold" href="/finishes" @mouseover="changeImage('/images/acabado1.jpg', 'Mármol pulido - Superficie lisa y brillante que refleja la luz.')">Pulido</a>
+              <a class="link rounded-md bg-transparent text-white text-xl mt-3 mb-3 font-bold" href="/finishes" @mouseover="changeImage('/images/apomazado1.jpg', 'Mármol apomazado - Acabado mate y suave.')">Apomazado</a>
+              <a class="link rounded-md bg-transparent text-white text-xl mt-3 mb-3 font-bold" href="/finishes" @mouseover="changeImage('/images/abujardado1.jpg', 'Mármol abujardado - Superficie rugosa con textura.')">Abujardado</a>
+            </div>
           </div>
         </div>
 
-        <div class="flex flex-col items-center justify-center md:w-1/2 space-y-2 md:space-y-0 md:border-l-4 border-white pl-0 md:pl-8">
-          <!-- Barra superior para dispositivos móviles -->
-          <div class="block md:hidden w-full">
-            <div class="border-t-4 border-white w-full mb-2"></div>
+        <!-- Para tamaños de pantalla pequeña, botones para mostrarlas imágenes de una vez -->
+        <div class="relative w-full block md:hidden">
+          <div class="flex flex-wrap justify-center items-center">
+            <button class="style-button uppercase" @click="openModal('/images/enbruto1.png')">En Bruto</button>
+            <button class="style-button uppercase" @click="openModal('/images/envejecido2.jpg')">Envejecido</button>
+            <button class="style-button uppercase" @click="openModal('/images/acabado1.jpg')">Pulido</button>
+            <button class="style-button uppercase" @click="openModal('/images/apomazado1.jpg')">Apomazado</button>
+            <button class="style-button uppercase" @click="openModal('/images/abujardado1.jpg')">Abujardado</button>
           </div>
-          <div class="flex items-baseline space-x-2">
-            <p ref="counter" class="counter-number text-6xl md:text-8xl font-bold text-white">53</p>
-            <p class="text-white text-2xl font-bold">+</p>
-          </div>
-          <p class="counter-text text-sm md:text-xl text-white">años de experiencia</p>
-          <!-- Barra inferior para dispositivos móviles -->
-          <div class="block md:hidden w-full">
-            <div class="border-t-4 border-white w-full mt-2"></div>
+          <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
+            <div class="relative bg-white p-4 rounded-lg">
+              <button class="absolute text-white top-2 right-2 bg-gray-950 p-1 rounded-md" @click="closeModal">Cerrar</button>
+              <img :src="modalImage" alt="Estilo de Mármol" class="max-w-full max-h-[70vh] h-auto object-contain" />
+            </div>
           </div>
         </div>
       </div>
 
-      <Footer />
+      <!-- Imagen larga -->
+      <div class="mt-10 flex justify-center items-center flex-col">
+        <img src="/images/fotos/01 VISTA GENERAL FÁBRICA.jpg" alt="Vista General de la Fábrica" class="max-w-full h-auto" />
+        <p class="pl-3 pr-3 bg-gray-950 text-white font-bold mt-4 py-2 rounded text-center text-sm sm:text-lg md:text-xl">VISTA GENERAL DE EUROSTONE</p>
+      </div>
+
+      <!-- Texto informativo #3 -->
+      <div class="bottom-content3">
+        <div class="flex flex-col items-center px-4 sm:px-8 md:px-16 lg:px-32">
+          <b class="mt-8 lg:text-4xl md:text-2xl lg:px-16 md:px-12 sm:px-8 sm:text-lg uppercase text-white bg-orange-800 border-2 border-blue p-2 rounded-xl mb-8 w-1/2 text-center"> MATERIALES </b>
+          <h3 class="mt-5 mb-6 text-xs sm:text-sm md:text-base lg:text-xl leading-relaxed text-justify">
+            En Eurostone, nos enorgullece ofrecer una amplia gama de <b>materiales</b> de la más alta calidad. Desde el clásico <b>mármol</b> hasta las piedras naturales más exóticas, cada uno de nuestros productos está seleccionado para garantizar <b>durabilidad</b> y <b>belleza</b> excepcionales. Nuestros <b>materiales</b> son perfectos para una variedad de aplicaciones, incluyendo <b>cocinas</b>, <b>baños</b>, <b>salones</b> y más. Descubra cómo nuestros <b>materiales</b> pueden transformar su espacio con <b>elegancia</b> y <b>sofisticación</b>.
+          </h3>
+          <Carousel :carouselItems="sliders" />
+          <div class="contact-section mt-10 text-center">
+            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-orange-800 font-bold">¿Tienes alguna duda? <font-awesome-icon icon="circle-question" /></h2>
+            <p class="mt-4 text-sm sm:text-base md:text-lg lg:text-xl text-gray-700">¡No dudes en contactarnos!: <a href="/contacto" class="text-indigo-600 hover:text-indigo-900 underline">Realizar Contacto</a></p>
+          </div>
+        </div>
+
+        <div>
+
+        </div>
+
+        <div class="flex flex-col md:flex-row bg-gray-900 p-4 md:p-12 m-2 space-y-4 md:space-y-0">
+          <div class="flex items-center justify-center md:w-1/2">
+            <div class="w-full px-2 md:px-6">
+              <p class="text-black text-sm md:text-lg bg-gray-200 px-4 py-4 text-justify rounded-lg shadow-xl">
+                En Eurostone, nuestros cimientos están arraigados en una tradición de más de medio siglo. Durante más de <b>50 años</b>, hemos sido <b>pioneros</b> en la industria de la
+                <b>piedra natural</b>, llevando la <b>excelencia</b> y la <b>innovación</b> a cada paso del camino. Desde nuestros humildes comienzos hasta nuestra posición actual como <b>líderes del mercado</b>,
+                cada día nos esforzamos por <b>superar</b> las <b>expectativas</b> y continuar siendo un referente en <b>calidad</b> y <b>servicio</b>.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center justify-center md:w-1/2 space-y-2 md:space-y-0 md:border-l-4 border-white pl-0 md:pl-8">
+            <!-- Barra superior para dispositivos móviles -->
+            <div class="block md:hidden w-full">
+              <div class="border-t-4 border-white w-full mb-2"></div>
+            </div>
+            <div class="flex items-baseline space-x-2">
+              <p ref="counter" class="counter-number text-6xl md:text-8xl font-bold text-white">53</p>
+              <p class="text-white text-2xl font-bold">+</p>
+            </div>
+            <p class="counter-text text-sm md:text-xl text-white">años de experiencia</p>
+            <!-- Barra inferior para dispositivos móviles -->
+            <div class="block md:hidden w-full">
+              <div class="border-t-4 border-white w-full mt-2"></div>
+            </div>
+          </div>
+        </div>
+
+        <Footer />
+      </div>
     </div>
   </div></template>
 
@@ -171,8 +176,8 @@ export default {
       grabbing: false,
       nextSlideTitle: 'CANTERAS',
       slides: [
-        { imageSrc: 'images/fotos/12.jpg', title: 'MATERIALES', link: '/materials' },
-        { imageSrc: 'images/fotos/13.jpg', title: 'CANTERAS', link: '/quarries' },
+        { imageSrc: '/images/fotos/03.jpg', title: 'MATERIALES', link: '/materials' },
+        { imageSrc: 'images/canteras2.jpg', title: 'CANTERAS', link: '/quarries' },
         { imageSrc: 'images/fotos/19_clasificar.jpg', title: 'ACABADOS', link: '/finishes' }
       ],
       direction: 'left',

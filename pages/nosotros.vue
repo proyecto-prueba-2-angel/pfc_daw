@@ -13,7 +13,7 @@
 
     <!-- Descripción general sobre Eurostone -->
     <section class="secciones my-12 mx-auto max-w-5xl px-4 md:px-8 bg-white p-6 md:p-8 rounded-lg shadow-lg">
-      <img src="/images/fotos/14.jpg" alt="Imagen de fondo" class="w-full h-auto mb-8 rounded-lg" />
+      <img src="/images/fotos/14.jpg" alt="Imagen Trabajo Eurostone" class="w-full h-auto mb-8 rounded-lg" />
       <h2 class="text-4xl md:text-5xl font-semibold text-center">¿Quiénes somos?</h2>
       <p class="text-base md:text-lg text-justify mt-4">
         <b>Eurostone</b> tiene sus raíces en una pequeña carnicería en Salamanca, donde nuestro fundador comenzó su camino empresarial. Con visión y determinación, decidió explorar el mundo del mármol, un material que combina belleza y durabilidad. Desde entonces, hemos crecido y nos hemos convertido en líderes en el sector, ofreciendo productos de la más alta calidad a nuestros clientes.

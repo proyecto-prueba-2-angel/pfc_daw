@@ -8,7 +8,7 @@
     <div class="flex flex-col items-center justify-center min-h-screen">
       <div class="relative w-full">
         <!-- Imagen de fondo con brillo controlado dinámicamente -->
-        <img :class="brightnessClass" src="/images/fotos/03.jpg" alt="Luxurious Marble Interior" class="w-full h-screen object-cover animate-fade transition-all duration-1000">
+        <img :class="brightnessClass" src="/images/fotos/canteras2.png" alt="Canteras de Eurostone" class="w-full h-screen object-cover animate-fade transition-all duration-1000">
         <!-- Contenedor de texto con animación de revelación de caracteres -->
         <div class="absolute top-1/4 w-full text-center">
           <h1 class="shine-effect text-6xl md:text-9xl font-bold text-white mb-16">
@@ -33,7 +33,10 @@
 
     <!-- Sección de la galería de imágenes -->
     <div class="container mx-auto p-5 my-12">
-      <h1 class="text-2xl font-bold text-center mb-8 mt-12 uppercase">Galería de Canteras</h1>
+      <h1 class="text-3xl font-bold text-center mb-4 mt-12 uppercase">Galería de Canteras</h1>
+      <p class="text-center text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed mb-8">
+        Explora nuestras canteras y descubre la calidad de nuestros materiales. <b class="text-black">Pincha</b> en las imágenes para obtener más información sobre cada <b class="text-black">cantera</b>.
+      </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div v-for="(image, index) in images" :key="index" class="cursor-pointer">
           <div class="image-container">
@@ -55,7 +58,7 @@
               <div class="inline-block w-full max-w-7xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <DialogPanel>
                   <div class="flex flex-col md:flex-row">
-                    <img :src="currentImage.src" class="max-w-full md:w-1/2 h-auto rounded animate-fade-right">
+                    <img :src="currentImage.src" alt="Cantera" class="max-w-full md:w-1/2 h-auto rounded animate-fade-right">
                     <div class="md:ml-4 mt-4 md:mt-0 md:w-1/2 animate-fade-left">
                       <h2 class="text-3xl font-bold mb-4">{{ currentImage.title }}</h2>
                       <p class="mb-4">{{ currentImage.description }}</p>
@@ -78,6 +81,7 @@
         </Dialog>
       </TransitionRoot>
     </div>
+
     <Footer />
   </div>
 </template>
@@ -85,7 +89,27 @@
 <script setup>
 import { ref } from 'vue';
 import { Dialog, DialogOverlay, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue';
-
+useHead({
+  title: 'Explora Nuestras Canteras - Eurostone',
+  meta: [
+    {
+      name: 'description',
+      content: 'Conoce dónde realizamos los procesos de extracción de nuestros materiales'
+    },
+    {
+      property: 'og:title',
+      content: 'Explora Nuestras Canteras - Eurostone'
+    },
+    {
+      property: 'og:description',
+      content: 'Conoce dónde realizamos los procesos de extracción de nuestros materiales.'
+    },
+    {
+      property: 'og:image',
+      content: 'https://example.com/path/to/your/image.jpg'
+    }
+  ]
+})
 const titleChars = 'CANTERAS'.split('');
 const router = useRoute();
 const brightnessClass = ref('brightness-100'); // Inicia con brillo al 100%
@@ -146,12 +170,9 @@ function scrollToSection(sectionId) {
   object-fit: cover;
 }
 
-.modal-container {
-  margin-top: 8rem; /* Incrementa el margen superior para evitar solapamiento con el header */
-}
-
 @media (max-width: 768px) {
   .modal-container {
+    margin-top: 8rem;
     padding-top: 0rem; /* Incrementa el padding superior para móviles */
   }
 }

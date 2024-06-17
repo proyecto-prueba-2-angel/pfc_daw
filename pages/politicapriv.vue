@@ -108,15 +108,28 @@
   </div>
 </template>
 
-<script>
-export default {
-  head() {
-    return {
-      title: 'Política de Privacidad',
-      description: 'Página de política de privacidad de Eurostone'
+<script setup>
+useHead({
+  title: 'Política de Privacidad - Eurostone',
+  meta: [
+    {
+      name: 'description',
+      content: 'Página de política de privacidad de Eurostone. Conozca cómo manejamos y protegemos sus datos personales.'
+    },
+    {
+      property: 'og:title',
+      content: 'Política de Privacidad - Eurostone'
+    },
+    {
+      property: 'og:description',
+      content: 'Página de política de privacidad de Eurostone. Conozca cómo manejamos y protegemos sus datos personales.'
+    },
+    {
+      property: 'og:image',
+      content: 'https://example.com/path/to/your/image.jpg'
     }
-  }
-}
+  ]
+})
 </script>
 
 <style scoped>

@@ -73,15 +73,28 @@
   </div>
 </template>
 
-<script>
-export default {
-  head() {
-    return {
-      title: 'Aviso Legal - Eurostone',
-      description: 'Página de aviso legal de Eurostone'
+<script setup>
+useHead({
+  title: 'Aviso Legal - Eurostone',
+  meta: [
+    {
+      name: 'description',
+      content: 'Página de aviso legalde Eurostone. Consulta nuestra legalidad'
+    },
+    {
+      property: 'og:title',
+      content: 'Aviso Legal - Eurostone'
+    },
+    {
+      property: 'og:description',
+      content: 'Página de aviso legal de Eurostone. Consulta nuestra legalidad'
+    },
+    {
+      property: 'og:image',
+      content: 'https://example.com/path/to/your/image.jpg'
     }
-  }
-}
+  ]
+})
 </script>
 
 <style scoped>

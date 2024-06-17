@@ -6,7 +6,7 @@
     <AdminButton />
     <div class="flex flex-col items-center justify-center flex-grow">
       <div class="relative w-full">
-        <img :class="brightnessClass" src="/images/fotos/19_clasificar.jpg" alt="Luxurious Marble Interior" class="w-full h-screen object-cover animate-fade transition-all duration-1000">
+        <img :class="brightnessClass" src="/images/fotos/19_clasificar.jpg" alt="Acabados en Fabrica" class="w-full h-screen object-cover animate-fade transition-all duration-1000">
         <div class="absolute top-1/4 w-full text-center">
           <h1 class="shine-effect text-6xl md:text-9xl font-bold text-white mb-16">
             <span v-for="(char, index) in titleChars" :key="index" :class="['revealText', index % 2 === 0 ? 'animate-fade-in-down' : 'animate-fade-in-up']" class="inline-block opacity-0">

@@ -20,29 +20,40 @@
         <div class="hidden md:flex items-center justify-center px-3 py-2 bg-red-800 shadow-md shadow-red-700 hover:bg-gray-900 hover:text-white hover:shadow-md hover:shadow-gray-800 transition duration-500 focus:outline-none font-semibold leading-6 text-gray-50 md:ml-10 rounded-full">
           <NuxtLink :to="headerData.ctaLink" class="flex items-center justify-center">
             <span class="hidden md:inline md:max-w-xs md:overflow-hidden md:text-sm">{{ headerData.ctaText }}</span>
-            <font-awesome-icon icon="comment-dots" class="md:ml-2 pt-1" />
+            <font-awesome-icon icon="comment-dots" class="md:ml-2 pt-1 mb-1" />
           </NuxtLink>
         </div>
       </div>
     </nav>
     <!-- Menú lateral (visible en dispositivos móviles cuando se activa) -->
-    <transition name="slide">
-      <div v-if="mobileMenuOpen" class="fixed inset-0 bg-black bg-opacity-50 z-50" @click="closeMenu"></div>
+    <transition name="slide ">
+      <div v-if="mobileMenuOpen" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50" @click="closeMenu"></div>
     </transition>
     <transition name="slide">
-      <nav v-if="mobileMenuOpen" class="fixed top-28 inset-y-0 left-0 w-64 bg-gray-950 z-50">
+      <nav v-if="mobileMenuOpen" class="lg:hidden fixed top-28 inset-y-0 left-0 w-64 bg-gray-950 z-50">
         <ul class="pt-10">
           <li v-for="(item, index) in headerData.navItems" :key="index">
             <a :href="item.link" class="block py-2 px-4 ml-2 text-lg font-bold text-gray-50 hover:text-custom-orange hover:bg-gray-200">{{ item.text }}</a>
           </li>
           <br>
+
           <hr class="lg:hidden w-4/5 mx-auto">
+
           <br>
           <li>
-            <a href="/contacto" class="block py-2 px-4 ml-2 text-lg font-bold text-gray-50 hover:text-custom-orange hover:bg-gray-200">Contacto</a>
+            <a href="/contacto" class="block py-2 px-4 ml-2 text-lg font-bold text-gray-50 hover:text-custom-orange hover:bg-gray-200 uppercase">Contacto</a>
           </li>
           <li>
-            <a href="/presupuesto" class="block py-2 px-4 ml-2 text-lg font-bold text-gray-50 hover:text-custom-orange hover:bg-gray-200">Pedir Presupuesto</a>
+            <a href="/presupuesto" class="block py-2 px-4 ml-2 text-lg font-bold text-gray-50 hover:text-custom-orange hover:bg-gray-200 mb-4 uppercase">Pedir Presupuesto</a>
+          </li>
+
+          <hr class="lg:hidden w-4/5 mx-auto mb-4">
+
+          <li>
+            <a href="/nosotros" class="block py-2 px-4 ml-2 text-lg font-bold text-gray-50 hover:text-custom-orange hover:bg-gray-200 uppercase">Sobre Nosotros</a>
+          </li>
+          <li>
+            <a href="/dondestamos" class="block py-2 px-4 ml-2 text-lg font-bold text-gray-50 hover:text-custom-orange hover:bg-gray-200 uppercase">Dónde Estamos</a>
           </li>
         </ul>
       </nav>

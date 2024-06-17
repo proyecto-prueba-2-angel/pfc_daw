@@ -10,7 +10,7 @@
       <li class="icon twitter">
         <a href="https://twitter.com/" target="_blank">
           <span class="tooltip">X</span>
-          <span><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" class="filter brightness-0 invert"></span>
+          <span><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X Logo" class="filter brightness-0 invert"></span>
         </a>
       </li>
       <li class="icon instagram">

@@ -3,34 +3,39 @@
     <Header />
     <AdminButton />
 
-    <div class="admin-container mx-auto">
-      <h1>Papelera de Contactos</h1>
-      <div class="bulk-actions">
-        <button :disabled="selectedContacts.length === 0" @click="bulkDeleteContacts">Eliminar Seleccionados <font-awesome-icon icon="trash" /></button>
-        <button :disabled="selectedContacts.length === 0" @click="bulkRestoreContacts">Restaurar Seleccionados <font-awesome-icon icon="undo" /></button>
-        <router-link to="/administrador/adminContacto" class="trash-link">Volver a Solicitudes de Contacto</router-link>
-      </div>
-      <div v-for="contact in contacts" :key="contact.id" class="contact-card">
-        <div class="contact-details">
-          <input v-model="selectedContacts" type="checkbox" :value="contact.id" />
-          <p><strong>De:</strong> {{ contact.nombre }} {{ contact.apellido }} ({{ contact.email }})</p>
-          <p><strong>Teléfono:</strong> {{ contact.telefono }}</p>
-          <p><strong>Mensaje:</strong> {{ contact.mensaje }}</p>
-          <p class="fecha-llegada"><strong>Fecha de Llegada:</strong> {{ contact.fecha_llegada }}</p>
-          <div class="buttons">
-            <button @click="deleteContact(contact.id)">Eliminar <font-awesome-icon icon="trash" /></button>
-            <button @click="restoreContact(contact.id)">Restaurar <font-awesome-icon icon="undo" /></button>
+    <div class="min-h-screen flex flex-col justify-between">
+
+      <div class="admin-container mx-auto">
+        <h1>Papelera de Contactos</h1>
+        <div class="bulk-actions flex flex-row space-x-4">
+          <button :disabled="selectedContacts.length === 0" @click="bulkDeleteContacts">Eliminar Seleccionados <font-awesome-icon icon="trash" /></button>
+          <button :disabled="selectedContacts.length === 0" @click="bulkRestoreContacts">Restaurar Seleccionados <font-awesome-icon icon="undo" /></button>
+          <router-link to="/administrador/adminContacto" class="trash-link">Volver a Solicitudes de Contacto</router-link>
+        </div>
+        <div v-for="contact in contacts" :key="contact.id" class="contact-card">
+          <div class="contact-details">
+            <input v-model="selectedContacts" type="checkbox" :value="contact.id" />
+            <p><strong>De:</strong> {{ contact.nombre }} {{ contact.apellido }} ({{ contact.email }})</p>
+            <p><strong>Teléfono:</strong> {{ contact.telefono }}</p>
+            <p><strong>Mensaje:</strong> {{ contact.mensaje }}</p>
+            <p class="fecha-llegada"><strong>Fecha de Llegada:</strong> {{ contact.fecha_llegada }}</p>
+            <div class="buttons">
+              <button @click="deleteContact(contact.id)">Eliminar <font-awesome-icon icon="trash" /></button>
+              <button @click="restoreContact(contact.id)">Restaurar <font-awesome-icon icon="undo" /></button>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="pagination">
-        <button :disabled="currentPage === 1" @click="prevPage">« Anterior</button>
-        <span> &nbsp; Página {{ currentPage }} - {{ contacts.length }} de {{ totalContacts }} contactos &nbsp;</span>
-        <button :disabled="!hasMoreData" @click="nextPage">Siguiente »</button>
+      <div>
+        <div class="pagination">
+          <button :disabled="currentPage === 1" @click="prevPage">« Anterior</button>
+          <span> &nbsp; Página {{ currentPage }} - {{ contacts.length }} de {{ totalContacts }} contactos &nbsp;</span>
+          <button :disabled="!hasMoreData" @click="nextPage">Siguiente »</button>
+        </div>
+        <Footer />
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 
@@ -56,7 +61,21 @@ export default {
   created() {
     this.fetchContacts();
   },
+  mounted() {
+    this.updateHead();
+  },
   methods: {
+    updateHead() {
+      document.title = 'Papelera de Contactos - Eurostone';
+      const descriptionContent = 'Eliminar o restaurar solicitudes de contacto.';
+      let descriptionMetaTag = document.querySelector('meta[name="description"]');
+      if(!descriptionMetaTag) {
+        descriptionMetaTag = document.createElement('meta');
+        descriptionMetaTag.setAttribute('name', 'description');
+        document.head.appendChild(descriptionMetaTag);
+      }
+      descriptionMetaTag.setAttribute('content', descriptionContent);
+    },
     fetchContacts() {
       fetch(`http://localhost/PFC/fetch_trash_contacts.php?page=${this.currentPage}&pageSize=${this.pageSize}`)
         .then(response => response.json())
@@ -179,128 +198,192 @@ export default {
 };
 </script>
 
-  <style scoped>
-  .admin-container {
-    padding: 20px;
-    max-width: 90%;
-    background-color: #f7f7f7;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-  }
-  h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  .contact-card {
-    border: 1px solid #e0e0e0;
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: box-shadow 0.3s ease;
-  }
-  .contact-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  .contact-details {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-  .contact-details p {
-    margin: 5px 0;
-    color: #555;
-  }
-  .contact-details .fecha-llegada {
-    margin-left: auto;
-    padding-left: 20px;
-    text-align: right;
-    color: #888;
-  }
-  .buttons {
-    display: flex;
-    gap: 10px;
-  }
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  button:hover {
-    background-color: #0056b3;
-  }
-  .pagination {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    color: white;
-    font-weight: bold;
-    background-color: #292929;
-    padding: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
-  }
-  .pagination button {
-    margin: 0 10px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .pagination button:disabled {
-    background-color: #555;
-    cursor: not-allowed;
-  }
-  .pagination button:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-  .bulk-actions {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    gap: 10px;
-  }
-  .bulk-actions button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .bulk-actions button:disabled {
-    background-color: #555;
-    cursor: not-allowed;
-  }
-  .bulk-actions button:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-  .trash-link {
-    color: #007bff;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #f7f7f7;
-    border: 1px solid #007bff;
-    margin-left: 10px;
-  }
-  .trash-link:hover {
-    background-color: #007bff;
-    color: white;
-  }
-  </style>
+<style scoped>
+.admin-container {
+  padding: 20px;
+  max-width: 90%;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  margin-bottom: 60px; /* Añadido margen inferior para separar del footer */
+}
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+.contact-card {
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: box-shadow 0.3s ease;
+}
+.contact-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.contact-details p {
+  margin: 5px 0;
+  color: #555;
+}
+.contact-details .fecha-llegada {
+  margin-left: auto;
+  padding-left: 20px;
+  text-align: right;
+  color: #888;
+}
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #0056b3;
+}
+.reply-section {
+  margin-top: 20px;
+}
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  margin-top: 20px;
+  color: #e7e7e7;
+  font-weight: bold;
+  background-color: #292929;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.pagination button {
+  margin: 0 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.pagination button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+.pagination button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 500px;
+  position: relative;
+}
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.loading-indicator {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.bulk-actions {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.bulk-actions button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.bulk-actions button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+.bulk-actions button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+.trash-link {
+  color: #007bff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  border: 1px solid #007bff;
+  margin-left: 10px;
+}
+.trash-link:hover {
+  background-color: #007bff;
+  color: white;
+}
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+</style>

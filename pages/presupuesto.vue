@@ -4,7 +4,7 @@
     <SubirBoton />
     <Cookies />
     <AdminButton />
-    <img src="/images/fotos/23.jpg" class="absolute h-full w-full object-cover -z-10 brightness-50" />
+    <img src="/images/fotos/23.jpg" alt="Eurostone Almacen" class="absolute h-full w-full object-cover -z-10 brightness-50" />
 
     <div class="flex-grow flex items-center justify-center p-4 z-20">
       <div class="bg-gray-300 rounded-2xl p-8 max-w-4xl w-full shadow-lg shadow-zinc-50">

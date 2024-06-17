@@ -6,12 +6,12 @@
     <Cookies />
 
     <!-- Imagen de fondo -->
-    <div class="hero-image relative z-0 overflow-hidden h-full min-h-screen flex items-center justify-center">
-      <img src="/public/images/fotos/03.jpg" class="absolute w-full h-full object-cover brightness-75">
-      <div class="relative z-10 w-full max-w-4xl bg-gray-300 p-8 rounded-lg shadow-lg mb-4 mt-4">
+    <div class="hero-image bg-zinc-800">
+      <img src="/public/images/fotos/03.jpg" class="absolute w-full h-full object-cover brightness-75" alt="Fondo de Piedras">
+      <div class="relative form-card z-10 w-full max-w-4xl bg-gray-300 p-8 rounded-lg shadow-lg mb-4 mt-4">
         <div class="mx-auto my-4 text-center">
           <h2 class="text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">SOLICITUD DE CONTACTO</h2>
-          <p class="mt-2 text-lg leading-8 text-gray-600">Déjanos tus datos y nosotros nos encargaremos en entrar en contacto contigo.</p>
+          <p class="mt-2 text-lg leading-8 text-gray-600">Déjanos tus datos y nosotros nos encargaremos en entrar en contacto contigo. También puedes consultar la <a href="/dondestamos" target="_blank" class="underline">información de contacto</a></p>
         </div>
         <form class="mx-auto mt-8 py-4 max-w-xl sm:mt-8" @submit.prevent="validateForm">
           <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
@@ -218,26 +218,36 @@ onMounted(() => {
 
 <style scoped>
 .hero-image {
-  position: relative;
-  text-align: center;
-  overflow: hidden;
-  height: 100vh;
+  min-height: 100vh; /* Minimum height to be at least the viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
 }
 
 .hero-image img {
-  filter: brightness(50%);
-  height: 100%;
-  object-fit: cover;
+  position: absolute; /* Absolute positioning to overlay under the form */
+  top: 0; /* Align top */
+  left: 0; /* Align left */
+  width: 100%; /* Full width of the container */
+  height: 100%; /* Full height of the container */
+  object-fit: cover; /* Ensures the image covers the area properly */
+  filter: brightness(50%); /* Reduce brightness for better readability of text on form */
+  z-index: 1; /* Lower z-index since it needs to be below the form */
 }
 
 .form-card {
   background-color: rgba(238, 238, 238, 0.928);
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  padding: 20px;
+  padding: 10px;
   margin: 0 auto;
   max-width: 800px;
   background-size: cover;
   background-position: center;
+  margin-top: 40px; /* Increase top margin */
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+
 }
 
 input, textarea {

@@ -74,7 +74,21 @@ export default {
   created() {
     this.fetchPresupuestos();
   },
+  mounted() {
+    this.updateHead();
+  },
   methods: {
+    updateHead() {
+      document.title = 'Administrar Presupuestos - Eurostone';
+      const descriptionContent = 'Administrar las solicitudes de presupuesto.';
+      let descriptionMetaTag = document.querySelector('meta[name="description"]');
+      if(!descriptionMetaTag) {
+        descriptionMetaTag = document.createElement('meta');
+        descriptionMetaTag.setAttribute('name', 'description');
+        document.head.appendChild(descriptionMetaTag);
+      }
+      descriptionMetaTag.setAttribute('content', descriptionContent);
+    },
     fetchPresupuestos() {
       fetch(`http://localhost/PFC/fetch_presupuestos.php?page=${this.currentPage}&pageSize=${this.pageSize}`)
         .then(response => response.json())
