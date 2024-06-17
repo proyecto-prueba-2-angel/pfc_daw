@@ -43,7 +43,13 @@
 
 <script>
 export default {
-  name: 'CookiePolicy'
+  name: 'CookiePolicy',
+  head() {
+    return {
+      title: 'Política de cookies - Eurostone',
+      description: 'Página de política de cookies de Eurostone'
+    }
+  }
 }
 </script>
 

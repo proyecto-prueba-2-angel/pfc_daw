@@ -112,7 +112,8 @@
 export default {
   head() {
     return {
-      title: 'Política de Privacidad'
+      title: 'Política de Privacidad',
+      description: 'Página de política de privacidad de Eurostone'
     }
   }
 }

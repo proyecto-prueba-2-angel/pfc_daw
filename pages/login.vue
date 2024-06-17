@@ -40,7 +40,27 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '~/stores/auth';
-
+useHead({
+  title: 'Entrar como administradoe - Eurostone',
+  meta: [
+    {
+      name: 'description',
+      content: 'Realizar consultas y solicitudes, desde aquí.'
+    },
+    {
+      property: 'og:title',
+      content: 'Entrar como administrador - Eurostone'
+    },
+    {
+      property: 'og:description',
+      content: 'Realizar consultas y solicitudes, desde aquí.'
+    },
+    {
+      property: 'og:image',
+      content: 'https://example.com/path/to/your/image.jpg'
+    }
+  ]
+})
 const email = ref('');
 const password = ref('');
 const showPassword = ref(false);

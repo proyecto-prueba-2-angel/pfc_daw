@@ -19,9 +19,8 @@
 import { ref, onMounted } from 'vue';
 import Cookies from 'js-cookie';
 
-const cookieDuration = 5 / 1440; // 1 year for demonstration, adjust as necessary
-const rejectionDuration = 5 / 1440; // 5 minutes in days
-
+const cookieDuration = 1; // 1 dia
+const rejectionDuration = 5 / 1440; // 5 minutos
 const cookieAccepted = ref(false);
 
 onMounted(() => {

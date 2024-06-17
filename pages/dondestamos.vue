@@ -31,19 +31,19 @@
 <script setup>
 // Configuración del head para la página específica
 useHead({
-  title: 'Localiza Nuestras Tiendas - Eurostone',
+  title: 'Localízanos - Eurostone',
   meta: [
     {
       name: 'description',
-      content: 'Encuentra la localización de nuestra tienda Eurostone. Visítanos en Novelda para descubrir los mejores mármoles y servicios para tu hogar.'
+      content: 'Encuentra la localización de nuestra fábrica Eurostone. Visítanos en Novelda para descubrir los mejores mármoles y servicios.'
     },
     {
       property: 'og:title',
-      content: 'Localiza Nuestras Tiendas - Eurostone'
+      content: 'Localízanos - Eurostone'
     },
     {
       property: 'og:description',
-      content: 'Encuentra la localización de nuestra tienda Eurostone. Visítanos en Novelda para descubrir los mejores mármoles y servicios para tu hogar.'
+      content: 'Encuentra la localización de nuestra fábrica Eurostone. Visítanos en Novelda para descubrir los mejores mármoles y servicios.'
     },
     {
       property: 'og:image',

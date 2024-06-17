@@ -10,7 +10,7 @@
         <!-- Imagen de fondo con brillo controlado dinámicamente -->
         <img :class="brightnessClass" src="/images/fotos/07.jpg" alt="Luxurious Marble Interior" class="w-full h-screen object-cover animate-fade transition-all duration-1000">
         <!-- Contenedor de texto con animación de revelación de caracteres -->
-        <div class="absolute top-1/4 w-full text-center">
+        <div class="absolute top-1/4 w-full text-center px-4 sm:px-8 md:px-16 lg:px-32">
           <h1 class="shine-effect text-6xl md:text-9xl font-bold text-white mb-16">
             <span
               v-for="(char, index) in titleChars" :key="index"
@@ -20,10 +20,10 @@
               {{ char }}
             </span>
           </h1>
-          <button class="bg-gray-950 text-gray-300 font-bold rounded-lg p-4 my-8 animate-jump-in animate-delay-[1500ms]" @click="scrollToMateriales">
+          <button class="bg-gray-950 text-gray-300 font-bold rounded-lg p-2 sm:p-4 md:p-6 my-4 md:my-8 animate-jump-in animate-delay-[1500ms]" @click="scrollToMateriales">
             DESCUBRE LOS MATERIALES
           </button>
-          <p class="text-xl text-white max-w-3xl mx-auto animate-fade-up animate-delay-1000">
+          <p class="text-lg sm:text-xl md:text-2xl text-white max-w-3xl mx-auto animate-fade-up animate-delay-1000">
             Explora la elegancia y versatilidad de nuestros exclusivos materiales de mármol, perfectos para cualquier proyecto arquitectónico o de diseño interior.
           </p>
         </div>
@@ -146,7 +146,7 @@
       <div class="mb-8">
         <!-- Tercer div, similar al primero -->
         <div class="third-image-container hidden md:flex mx-8 my-16 border-1 border-zinc-950 rounded-lg shadow-zinc-950 shadow-md">
-          <img src="/images/rosa1.jpg" alt="Imagen" class="third-image" />
+          <img src="/images/rosazarc2.jpg" alt="Imagen" class="third-image" />
           <div id="third-cortina" :class="{ 'show': thirdShowContent }" class="content text-justify relative">
             <h1 class="uppercase transition-transform duration-500 ease-in-out transform cursor-pointer shine-effect text-left hover:translate-x-2 hover:opacity-90 text-2xl md:text-4xl">
               ROSA ZARCI
@@ -211,7 +211,7 @@
       <!-- Cuadro de información sobre el material -->
       <div id="detalles-orvell" class="hidden md:flex flex-row  text-gray-50 bg-zinc-950 shadow-md p-8 mt-5 mb-6 mx-0 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed relative">
         <div class="w-1/2 p-8 space-y-4">
-          <img src="/images/fondo1.png" alt="ORVELL" class="brightness-90 rounded-lg shadow-xl mx-auto" style="max-height: 400px; object-fit: cover;">
+          <img src="/images/fotos/orvell2.jpg" alt="ORVELL" class="brightness-90 rotate-90 rounded-lg shadow-xl mx-auto" style="max-height: 400px; object-fit: cover;">
           <p class="text-justify">
             El material Orvell es una excelente elección para proyectos que requieren una estética refinada y sofisticada. Su durabilidad y resistencia lo hacen ideal para aplicaciones tanto en interiores como en exteriores.
           </p>
@@ -239,7 +239,7 @@
       <div class="mb-8">
         <!-- Quinto div, similar al primero -->
         <div class="fifth-image-container hidden md:flex mx-8 my-16 border-1 border-zinc-950 rounded-lg shadow-zinc-950 shadow-md">
-          <img src="/images/marfil2.jpg" alt="Imagen" class="fifth-image" />
+          <img src="/images/cream3.jpg" alt="Imagen" class="fifth-image" />
           <div id="fifth-cortina" :class="{ 'show': fifthShowContent }" class="content text-justify relative">
             <h1 class="uppercase transition-transform duration-500 ease-in-out transform cursor-pointer shine-effect text-left hover:translate-x-2 hover:opacity-90 text-2xl md:text-4xl">
               CREMA MAGDALA
@@ -472,19 +472,19 @@ const isModalOpen = ref(false);
 const selectedMaterial = ref({});
 
 useHead({
-  title: 'Explora Nuestros Materiales - Eurostone',
+  title: 'Descubre Nuestros Materiales - Eurostone',
   meta: [
     {
       name: 'description',
-      content: 'Encuentra las localizaciones de nuestras tiendas Megahogar. Visítanos en Babel y Vistahermosa para descubrir los mejores productos para tu hogar.'
+      content: 'Gran variedad de materiales para los mármoles y piedras, a tu elección'
     },
     {
       property: 'og:title',
-      content: 'Explora Nuestras Cocinas - Megahogar'
+      content: 'Descubre Nuestros Materiales - Eurostone'
     },
     {
       property: 'og:description',
-      content: 'Encuentra las localizaciones de nuestras tiendas Megahogar. Visítanos en Babel y Vistahermosa para descubrir los mejores productos para tu hogar.'
+      content: 'Gran variedad de materiales para los mármoles y piedras, a tu elección.'
     },
     {
       property: 'og:image',

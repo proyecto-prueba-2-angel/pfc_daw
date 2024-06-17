@@ -164,7 +164,7 @@ a {
 }
 .logo-image {
   width: auto;
-  max-width: 80%;
+  max-width: 60%;
   height: auto;
   max-height: 80px; /* Ajusta este valor según sea necesario */
 }
@@ -812,21 +812,11 @@ a {
   outline: none; /* Elimina el contorno al hacer foco para mantener el diseño limpio */
 }
 
-@media (max-width: 1024px) {
-
-.slide-title2 {
-  position: absolute;
-  bottom: 60%;
-  left: 0%;
-  transform-origin: top left;
-}
-
-}
 @media (max-width: 640px) {
 
   .slide-title2 {
     position: absolute;
-    bottom: 80%;
+    bottom: 85%;
     left: 0%;
     transform-origin: top left;
   }

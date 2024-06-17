@@ -5,16 +5,12 @@
     <AdminButton />
     <Cookies />
 
-    <div class="hero-image relative z-0 overflow-hidden h-48 md:h-64 lg:h-72">
-      <img src="/public/images/fotos/03.jpg" class="w-full h-full object-cover brightness-75">
-      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-        <h1 class="shine-effect text-white text-5xl md:text-7xl lg:text-9xl font-bold shadow-lg rounded-xl p-4">CONTACTO</h1>
-      </div>
-    </div>
-    <div class="contenedor shadow-lg shadow-zinc-50 bg-gray-900 px-6 py-24 sm:py-32 lg:px-8">
-      <div class="form-card rounded-md p-4">
-        <div class="mx-auto my-4 max-w-2xl text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">Contáctanos</h2>
+    <!-- Imagen de fondo -->
+    <div class="hero-image relative z-0 overflow-hidden h-full min-h-screen flex items-center justify-center">
+      <img src="/public/images/fotos/03.jpg" class="absolute w-full h-full object-cover brightness-75">
+      <div class="relative z-10 w-full max-w-4xl bg-gray-300 p-8 rounded-lg shadow-lg mb-4 mt-4">
+        <div class="mx-auto my-4 text-center">
+          <h2 class="text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">SOLICITUD DE CONTACTO</h2>
           <p class="mt-2 text-lg leading-8 text-gray-600">Déjanos tus datos y nosotros nos encargaremos en entrar en contacto contigo.</p>
         </div>
         <form class="mx-auto mt-8 py-4 max-w-xl sm:mt-8" @submit.prevent="validateForm">
@@ -55,7 +51,7 @@
                 <span v-if="errors.mensaje" class="text-red-500 text-sm">{{ errors.mensaje }}</span>
               </div>
             </div>
-            <div class="sm:col-span-2 flex items-start sm:items-center sm:flex-row flex-col">
+            <div class="sm:col-span-2 flex items-center sm:items-center sm:flex-row flex-col">
               <input id="aceptarPolit" v-model="aceptarPolit" type="checkbox" class="max-w-4 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 mt-1">
               <label for="aceptarPolit" class="ml-2 text-sm leading-6 text-gray-600">
                 Al seleccionar esto, también aceptarás nuestra
@@ -63,6 +59,10 @@
               </label>
               <span v-if="errors.aceptarPolit" class="text-red-500 text-sm ml-2">{{ errors.aceptarPolit }}</span>
             </div>
+          </div>
+          <div class="mt-4">
+            <div class="g-recaptcha" data-sitekey="6LcZVfopAAAAAKdChmU5wSIIMSdmohjJxxWg1SlJ"></div>
+            <span v-if="errors.recaptcha" class="text-red-500 text-sm">{{ errors.recaptcha }}</span>
           </div>
           <div class="mt-10">
             <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
@@ -91,8 +91,28 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
+import { ref, onMounted } from 'vue';
+useHead({
+  title: 'Contáctanos  - Eurostone',
+  meta: [
+    {
+      name: 'description',
+      content: 'Establece contacto con nosotros a través de un formulario'
+    },
+    {
+      property: 'og:title',
+      content: 'Contáctanos - Eurostone'
+    },
+    {
+      property: 'og:description',
+      content: 'Descubre qué canteras tenemos y qué materiales producen'
+    },
+    {
+      property: 'og:image',
+      content: 'https://example.com/path/to/your/image.jpg'
+    }
+  ]
+})
 const showModal = ref(false);
 const isSubmitting = ref(false);
 const nombre = ref('');
@@ -131,6 +151,9 @@ function validateForm() {
   if(!aceptarPolit.value) {
     errors.value.aceptarPolit = 'Debes aceptar la política de privacidad.';
   }
+  if(!grecaptcha.getResponse()) {
+    errors.value.recaptcha = 'Por favor, completa el reCAPTCHA.';
+  }
 
   if(Object.keys(errors.value).length === 0) {
     submitForm();
@@ -151,6 +174,7 @@ async function submitForm() {
   formData.append('telefono', telefono.value);
   formData.append('mensaje', mensaje.value);
   formData.append('aceptar_polit', aceptarPolit.value ? 1 : 0);
+  formData.append('g-recaptcha-response', grecaptcha.getResponse());
 
   try {
     const response = await fetch('http://localhost/PFC/guardar_contacto.php', {
@@ -180,14 +204,26 @@ function clearForm() {
   telefono.value = '';
   mensaje.value = '';
   aceptarPolit.value = false;
+  grecaptcha.reset();
   errors.value = {};
 }
+
+onMounted(() => {
+  const script = document.createElement('script');
+  script.src = 'https://www.google.com/recaptcha/api.js';
+  script.async = true;
+  document.head.appendChild(script);
+});
 </script>
 
 <style scoped>
 .hero-image {
-  height: 48vh; /* Ajustar la altura en pantallas grandes */
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  height: 100vh;
 }
+
 .hero-image img {
   filter: brightness(50%);
   height: 100%;
@@ -217,8 +253,8 @@ button:hover {
 }
 
 @media (max-width: 768px) {
-  .hero-image h1 {
-    font-size: 3rem;
+  .hero-image {
+    height: auto;
   }
   .form-card {
     width: 100%;

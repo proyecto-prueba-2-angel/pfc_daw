@@ -7,7 +7,7 @@
     <img src="/images/fotos/23.jpg" class="absolute h-full w-full object-cover -z-10 brightness-50" />
 
     <div class="flex-grow flex items-center justify-center p-4 z-20">
-      <div class="bg-white rounded-2xl p-8 max-w-4xl w-full shadow-lg shadow-zinc-50">
+      <div class="bg-gray-300 rounded-2xl p-8 max-w-4xl w-full shadow-lg shadow-zinc-50">
         <h2 class="text-2xl font-bold text-center text-gray-700 mb-6 uppercase">Solicitud de Presupuesto</h2>
 
         <form class="space-y-6" @submit.prevent="validateForm">
@@ -69,7 +69,9 @@
             <textarea v-model="descripcion" rows="4" class="mt-1 block w-full px-3 py-2 rounded-md focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"></textarea>
           </div>
 
-          <div class="flex justify-between">
+          <div class="g-recaptcha" data-sitekey="6Lf5UvopAAAAAO3j-yccffxipAcuXwO5ukpR2tUG"></div>
+
+          <div class="flex justify-between mt-4">
             <button type="button" class="py-2 px-4 bg-gray-400 text-white font-bold rounded-lg hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50" @click="resetForm">
               Borrar
             </button>
@@ -101,6 +103,16 @@
 
 <script setup>
 import { ref } from 'vue';
+
+useHead({
+  title: 'Solicitud de Presupuesto - Eurostone',
+  meta: [
+    { name: 'description', content: 'Formulario para solicitar presupuesto de materiales de mármol en Eurostone.' }
+  ],
+  script: [
+    { src: 'https://www.google.com/recaptcha/api.js', async: true, defer: true }
+  ]
+});
 
 const showModal = ref(false);
 const isSubmitting = ref(false);
@@ -156,6 +168,7 @@ async function submitForm() {
   formData.append('titulo_proyecto', titulo_proyecto.value);
   formData.append('acabado', acabado.value);
   formData.append('descripcion', descripcion.value);
+  formData.append('g-recaptcha-response', document.querySelector('.g-recaptcha-response').value);
 
   try {
     const response = await fetch('http://localhost/PFC/guardar_presupuesto.php', {
@@ -208,6 +221,12 @@ button {
 @media (max-width: 768px) {
   .bg-white {
     padding: 1rem;
+  }
+  .p-8 {
+    padding: 2rem;
+  }
+  .h-full {
+    display: none;
   }
 }
 </style>

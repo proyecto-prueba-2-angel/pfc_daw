@@ -1,5 +1,5 @@
 <template>
-  <div>   <!-- Sin usar -->
+  <div class="overflow-x-hidden">   <!-- Sin usar -->
     <Header />   <!-- Sin Usar -->
     <SubirBoton />
     <AdminButton />
@@ -24,7 +24,7 @@
 
         <!-- Botón que dirige a la página correspondiente al slide -->
         <NuxtLink class="slide-title" :class="{ 'animate-slide': animating }" :to="currentSlide.link">
-          <h2 class="bg-[rgba(255,255,255,0.99  )] sm:bg-[rgba(255,255,255,0.4)] p-2 md:p-5 hover:opacity-75 hover:bg-orange-800 hover:text-gray-200 rounded-md font-extrabold transition duration-500 ease-in-out slide-title2 text-3xl sm:text-4xl md:text-5xl" style="text-align: center;">{{ currentSlide.title }}</h2>
+          <h2 class="bg-[rgba(255,255,255,0.84)] sm:bg-[rgba(255,255,255,0.4)] p-2 md:p-5 hover:opacity-75 hover:bg-orange-800 hover:text-gray-200 mx-auto rounded-md font-extrabold transition duration-500 ease-in-out slide-title2 text-3xl sm:text-4xl md:text-5xl" style="text-align: center;">{{ currentSlide.title }}</h2>
         </NuxtLink>
 
         <div class="navigation-buttons">
@@ -164,6 +164,7 @@ const isMenuOpen = ref(false);
 export default {
   data() {
     return {
+      nextSlideImg: '',
       isMobile: false,
       currentSlideIndex: 0,
       animating: false,

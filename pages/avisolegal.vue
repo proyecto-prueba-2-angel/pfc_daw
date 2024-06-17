@@ -77,7 +77,8 @@
 export default {
   head() {
     return {
-      title: 'Aviso Legal - EUROSTONE'
+      title: 'Aviso Legal - Eurostone',
+      description: 'Página de aviso legal de Eurostone'
     }
   }
 }

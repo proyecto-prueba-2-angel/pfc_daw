@@ -77,7 +77,27 @@
 <script setup>
 import { ref, reactive, onMounted, computed, watch } from 'vue';
 import { Dialog, DialogOverlay, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue';
-
+useHead({
+  title: 'Conoce Nuestros Acabados - Eurostone',
+  meta: [
+    {
+      name: 'description',
+      content: 'Disponemos de diferentes acabados para adaptar los materiales.'
+    },
+    {
+      property: 'og:title',
+      content: 'Conoce Nuestros Acabados - Eurostone'
+    },
+    {
+      property: 'og:description',
+      content: 'Disponemos de diferentes acabados para adaptar los materiales.'
+    },
+    {
+      property: 'og:image',
+      content: 'https://example.com/path/to/your/image.jpg'
+    }
+  ]
+})
 const titleChars = 'ACABADOS'.split('');
 const brightnessClass = ref('brightness-100');
 
@@ -104,7 +124,7 @@ const acabados = ref([
   },
   {
     title: 'Envejecido',
-    image: '/images/vejez2.png',
+    image: '/images/fotos/marmol-travertino.png',
     shortDescription: 'Superficie tratada para parecer antigua y desgastada.',
     detailedDescription: 'El acabado envejecido proporciona una apariencia rústica y desgastada, agregando carácter y antigüedad a cualquier espacio. Perfecto para decoraciones vintage o industriales, combina excelentemente con metales oxidados y maderas envejecidas. Este acabado se logra mediante técnicas que simulan el desgaste natural del mármol a lo largo del tiempo, ofreciendo una superficie con texturas y tonalidades que evocan la historia y el paso de los años. Es ideal para su uso en ambientes interiores como salas de estar, cocinas y baños, donde se desea una apariencia antigua y acogedora.'
   },
@@ -122,7 +142,7 @@ const acabados = ref([
   },
   {
     title: 'Abujardado',
-    image: '/images/abuj2.jpg',
+    image: '/images/abu3.jpg',
     shortDescription: 'Superficie rugosa con textura uniforme.',
     detailedDescription: 'El acabado abujardado crea una superficie rugosa con textura uniforme, proporcionando excelente agarre. Ideal para suelos exteriores y áreas húmedas como piscinas y baños, se combina bien con otros materiales antideslizantes para mayor seguridad. Este acabado se logra mediante la aplicación de una herramienta llamada bujarda, que martillea la superficie del mármol creando pequeños cráteres uniformes. Además de su funcionalidad en términos de seguridad, el acabado abujardado añade una dimensión táctil al mármol, haciendo que sea visualmente atractivo y práctico para áreas de alto tránsito y exposición a la humedad.'
   }
